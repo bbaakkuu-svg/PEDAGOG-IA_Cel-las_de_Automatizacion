@@ -1,0 +1,36 @@
+{
+    "project": {
+        "name": "PEDAGOG-IA: Células de Automatización",
+        "repo_name": "PEDAGOG-IA_Cel-las_de_Automatizacion",
+        "owner": "bbaakkuu-svg",
+        "description": "Ecosistema de automatización pedagógica y arquitectural"
+    },
+    "git_flow": {
+        "main_branch": "main",
+        "develop_branch": "develop",
+        "feature_prefix": "feature/",
+        "bugfix_prefix": "bugfix/",
+        "hotfix_prefix": "hotfix/"
+    },
+    "github_settings": {
+        "project_number": 1,
+        "labels": [
+            "bug",
+            "enhancement",
+            "documentation",
+            "ui/ux",
+            "critical"
+        ],
+        "auto_assign": true
+    },
+    "ai_preferences": {
+        "provider": "Gemini",
+        "documentation_style": "Professional Senior",
+        "auto_analyze_build_errors": true
+    },
+    "paths": {
+        "dist": "Distribuible_App",
+        "docs": "docs",
+        "src": "src"
+    }
+}

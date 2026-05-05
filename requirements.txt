@@ -1,0 +1,1 @@
+﻿pydantic\njinja2\nrich\ngh-cli
