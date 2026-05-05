@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Competencias | PEDAGOG-IA</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Mapa de Competencias</h1>
+            <p class="subtitle" id="student-info">Cargando perfil del alumno...</p>
+        </header>
+
+        <div class="dashboard-grid">
+            <div class="chart-container">
+                <canvas id="competencyChart"></canvas>
+            </div>
+
+            <div class="info-section">
+                <div class="insight-card">
+                    <h3>✨ IA Insights</h3>
+                    <p class="insight-text" id="ai-insight-text">
+                        Analizando datos competenciales para generar recomendaciones personalizadas...
+                    </p>
+                </div>
+                
+                <div style="margin-top: 20px; display: flex; gap: 10px;">
+                    <button id="export-btn" style="padding: 10px 20px; border-radius: 8px; border: none; background: var(--primary); color: white; cursor: pointer;">Descargar Reporte</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

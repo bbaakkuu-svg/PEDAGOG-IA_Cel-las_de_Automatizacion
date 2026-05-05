@@ -1,0 +1,6 @@
+student_id,last_login_days,submission_rate,avg_grade,forum_posts
+STU_001,2,0.95,8.5,12
+STU_002,10,0.40,4.2,1
+STU_003,1,0.88,7.0,5
+STU_004,15,0.10,2.0,0
+STU_005,5,0.60,5.5,2

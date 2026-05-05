@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: cloud-native-task-scheduler
+Version: 0.1.0
+Summary: Scheduler con Inyección de Dependencias para ejecución agnóstica a la nube.
+Author: Antigravity Célula Docensas
+Requires-Python: >=3.9
+Requires-Dist: rich>=10.0.0
+Dynamic: author
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary

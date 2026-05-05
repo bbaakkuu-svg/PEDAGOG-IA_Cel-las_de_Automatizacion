@@ -1,0 +1,15 @@
+README.md
+setup.py
+ecosystem_sync_orchestrator/__init__.py
+ecosystem_sync_orchestrator.egg-info/PKG-INFO
+ecosystem_sync_orchestrator.egg-info/SOURCES.txt
+ecosystem_sync_orchestrator.egg-info/__init__.py
+ecosystem_sync_orchestrator.egg-info/dependency_links.txt
+ecosystem_sync_orchestrator.egg-info/requires.txt
+ecosystem_sync_orchestrator.egg-info/top_level.txt
+ecosystem_sync_orchestrator/adapters/__init__.py
+ecosystem_sync_orchestrator/adapters/git_adapter.py
+ecosystem_sync_orchestrator/core/__init__.py
+ecosystem_sync_orchestrator/core/orchestrator.py
+ecosystem_sync_orchestrator/core/strategies.py
+tests/__init__.py

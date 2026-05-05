@@ -1,0 +1,12 @@
+{
+    "student_name": "Juan Perez",
+    "course": "Arquitectura de Automatizacion",
+    "competencies": [
+        {"name": "Pensamiento Critico", "value": 85, "average": 70},
+        {"name": "Resolucion de Problemas", "value": 92, "average": 75},
+        {"name": "Trabajo en Equipo", "value": 65, "average": 80},
+        {"name": "Competencia Tecnica", "value": 88, "average": 65},
+        {"name": "Comunicacion", "value": 70, "average": 72}
+    ],
+    "ai_insight": "Juan destaca en resolucion de problemas tecnicos, pero necesita reforzar su colaboracion en equipo para equilibrar su perfil profesional."
+}
