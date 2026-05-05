@@ -1,0 +1,25 @@
+{
+    "summary": "RESUMEN EJECUTIVO:\nEl contenido trata sobre La arquitectura de PEDAGOG-IA se basa en celulas d... \n\nPuntos Clave:\n1. Automatizacion Modular.\n2. Integracion con IA.",
+    "quiz": [
+        {
+            "question": "Â¿Cual es el objetivo principal de la CǸlula Docensas?",
+            "options": [
+                "Automatizacion",
+                "Docencia",
+                "Investigacion",
+                "Todas las anteriores"
+            ],
+            "answer": "Todas las anteriores"
+        },
+        {
+            "question": "Â¿Que framework utiliza el Scaffolder?",
+            "options": [
+                "Django",
+                "Kenneth Reitz",
+                "Flask",
+                "FastAPI"
+            ],
+            "answer": "Kenneth Reitz"
+        }
+    ]
+}

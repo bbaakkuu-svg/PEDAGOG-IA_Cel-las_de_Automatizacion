@@ -1,0 +1,14 @@
+README.md
+setup.py
+api_intelligence_wrapper/__init__.py
+api_intelligence_wrapper/facade.py
+api_intelligence_wrapper.egg-info/PKG-INFO
+api_intelligence_wrapper.egg-info/SOURCES.txt
+api_intelligence_wrapper.egg-info/__init__.py
+api_intelligence_wrapper.egg-info/dependency_links.txt
+api_intelligence_wrapper.egg-info/requires.txt
+api_intelligence_wrapper.egg-info/top_level.txt
+api_intelligence_wrapper/adapters/__init__.py
+api_intelligence_wrapper/core/__init__.py
+api_intelligence_wrapper/core/models.py
+tests/__init__.py
