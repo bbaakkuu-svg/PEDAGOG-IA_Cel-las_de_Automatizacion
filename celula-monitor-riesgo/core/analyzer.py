@@ -49,31 +49,46 @@ class RiskAnalyzer:
 
     def calculate_risk(self):
         """
-        Calcula el nivel de riesgo (vía diccionarios).
+        Calcula el nivel de riesgo con resiliencia (Graceful Degradation).
+        Soporta tanto datasets completos de logs como reportes parciales del Auditor.
         """
         final_results = []
         for row in self.data:
             score = 0
             
             # Helper para convertir a float/int seguro
-            def safe_val(key, default=0):
-                val = row.get(key, default)
+            def safe_val(key, default=None):
+                val = row.get(key)
+                if val is None or str(val).strip() == '':
+                    return default
                 try:
-                    return float(val) if val is not None else default
+                    return float(val)
                 except:
                     return default
 
-            last_login = safe_val('last_login_days', safe_val('login_days', 0))
-            sub_rate = safe_val('submission_rate', safe_val('tasa_entrega', 1.0))
-            grade = safe_val('avg_grade', safe_val('nota_media', 10.0))
-            posts = safe_val('forum_posts', safe_val('posts_foro', 5))
+            # Extracción flexible de variables (Data Contract)
             student_id = row.get('student_id', row.get('id', 'N/A'))
+            grade = safe_val('nota_media', safe_val('avg_grade'))
+            
+            # Variables de log de plataforma (pueden no existir si viene del Auditor)
+            last_login = safe_val('last_login_days', safe_val('login_days'))
+            sub_rate = safe_val('submission_rate', safe_val('tasa_entrega'))
+            posts = safe_val('forum_posts', safe_val('posts_foro'))
 
-            if last_login > 7: score += 40
-            if sub_rate < 0.5: score += 30
-            if grade < 5: score += 20
-            if posts < 2: score += 10
+            # Lógica de Pesos Dinámicos
+            if last_login is None and sub_rate is None and posts is None:
+                # MODO AUDITOR: Solo tenemos la nota media. El peso recae 100% en el rendimiento.
+                if grade is not None:
+                    if grade < 5: score += 70  # Suspenso directo -> Riesgo Crítico
+                    elif grade < 7: score += 40 # Aprobado justo -> Riesgo Medio
+            else:
+                # MODO COMPLETO: Datos de plataforma + Notas
+                if last_login is not None and last_login > 7: score += 40
+                if sub_rate is not None and sub_rate < 0.5: score += 30
+                if grade is not None and grade < 5: score += 20
+                if posts is not None and posts < 2: score += 10
 
+            # Determinación del nivel
             level = "BAJO"
             if score >= 70: level = "CRITICO"
             elif score >= 40: level = "MEDIO"

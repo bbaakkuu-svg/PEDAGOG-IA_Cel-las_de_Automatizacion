@@ -91,3 +91,35 @@ h1 {
         grid-template-columns: 1fr;
     }
 }
+
+/* Soporte para impresión / exportación a PDF */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+    .container {
+        box-shadow: none;
+        border: none;
+        background: white;
+    }
+    h1 {
+        -webkit-text-fill-color: black;
+        background: none;
+    }
+    .insight-card {
+        border-left: 4px solid black;
+        background: #f1f1f1;
+        color: black;
+    }
+    .insight-text {
+        color: black;
+    }
+    #export-btn {
+        display: none;
+    }
+    /* Forzar gráficos a no oscurecerse en impresión */
+    canvas {
+        -webkit-print-color-adjust: exact;
+    }
+}

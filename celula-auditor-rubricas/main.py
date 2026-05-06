@@ -108,8 +108,7 @@ class RubricAuditorSEA:
                     raise RuntimeError("Soporte para PDF no disponible. Instale 'pymupdf'.")
                 text = self.pdf_adapter.extract_text(path)
             else:
-                with open(path, 'r', encoding='utf-8') as f:
-                    text = f.read()
+                text = open(path, 'r', encoding='utf-8').read()
             
             rubric_data = {
                 "source": os.path.basename(path),
@@ -148,8 +147,7 @@ class RubricAuditorSEA:
                         raise RuntimeError("Soporte para PDF no disponible. Instale 'pymupdf'.")
                     work_text = self.pdf_adapter.extract_text(path)
                 else:
-                    with open(path, 'r', encoding='utf-8') as f:
-                        work_text = f.read()
+                    work_text = open(path, 'r', encoding='utf-8').read()
                 time.sleep(2)
                 
                 results = self._perform_comparative_analysis(work_text, rubric)

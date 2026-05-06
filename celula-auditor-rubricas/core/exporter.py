@@ -10,33 +10,38 @@ class ExcelExporter:
         self._initialize_file()
 
     def _initialize_file(self):
-        """Crea el archivo con encabezados si no existe."""
+        """Crea el archivo con encabezados estandarizados para Interoperabilidad."""
         if not os.path.exists(self.output_path):
             wb = Workbook()
             ws = wb.active
             ws.title = "Evaluaciones"
-            # Encabezados profesionales
+            # Encabezados estandarizados (Data Contract)
             headers = [
-                "Fecha/Hora", 
-                "Archivo Alumno", 
-                "Rúbrica Aplicada", 
-                "Nota Final", 
-                "Estado",
-                "Criterios Evaluados"
+                "fecha_hora", 
+                "student_id",
+                "archivo_origen",
+                "rubrica_aplicada", 
+                "nota_media", 
+                "estado_evaluacion",
+                "criterios_evaluados"
             ]
             ws.append(headers)
             wb.save(self.output_path)
 
     def add_evaluation(self, student_file, rubric_name, nota, criteria_summary):
-        """Añade una fila con el resultado de la evaluación."""
+        """Añade una fila con el resultado de la evaluación estandarizada."""
         try:
             wb = load_workbook(self.output_path)
             ws = wb.active
             
             estado = "Sobresaliente" if nota >= 9 else "Notable" if nota >= 7 else "Aprobado" if nota >= 5 else "Insuficiente"
             
+            # Extracción limpia del ID del estudiante (ej: "Juan_Perez_Examen.pdf" -> "Juan_Perez_Examen")
+            student_id = os.path.splitext(student_file)[0]
+            
             row = [
                 time.strftime("%Y-%m-%d %H:%M:%S"),
+                student_id,
                 student_file,
                 rubric_name,
                 nota,
