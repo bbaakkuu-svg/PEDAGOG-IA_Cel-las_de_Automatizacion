@@ -10,10 +10,13 @@ datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
 
 a = Analysis(
     ['..\\celula-auditor-rubricas\\main.py'],
-    pathex=['.'],
+    pathex=['.', '..\\celula-auditor-rubricas'],
     binaries=binaries,
-    datas=datas,
-    hiddenimports=hiddenimports,
+    datas=[
+        ('..\\celula-auditor-rubricas\\adapters\\*.py', 'adapters'),
+        ('..\\celula-auditor-rubricas\\prompts\\*.md', 'prompts'),
+    ] + datas,
+    hiddenimports=['adapters.pdf_adapter'] + hiddenimports,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],

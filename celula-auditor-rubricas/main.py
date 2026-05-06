@@ -22,18 +22,26 @@ from rich.markdown import Markdown
 
 # Intentar importar dependencias locales
 try:
+    # Soporte para PyInstaller
+    if getattr(sys, 'frozen', False):
+        bundle_dir = sys._MEIPASS
+        if bundle_dir not in sys.path:
+            sys.path.insert(0, bundle_dir)
+    
     # Añadir el directorio raíz al path para importaciones cruzadas
     root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
     if root_path not in sys.path:
         sys.path.insert(0, root_path)
     
-    from adapters.pdf_adapter import PDFAdapter
-except ImportError:
-    # Fallback si se ejecuta desde el directorio padre
+    # Intentar importación directa (estructura plana de PyInstaller)
     try:
-        from celula_auditor_rubricas.adapters.pdf_adapter import PDFAdapter
+        from adapters.pdf_adapter import PDFAdapter
     except ImportError:
-        PDFAdapter = None
+        # Intentar importación relativa al paquete
+        from celula_auditor_rubricas.adapters.pdf_adapter import PDFAdapter
+except Exception as e:
+    PDFAdapter = None
+    _import_error = str(e)
 
 console = Console()
 
@@ -41,7 +49,12 @@ class RubricAuditorADI:
     """Auditor Dinámico Inteligente (ADI)"""
     
     def __init__(self):
-        self.pdf_adapter = PDFAdapter() if PDFAdapter else None
+        try:
+            self.pdf_adapter = PDFAdapter() if PDFAdapter else None
+        except Exception as e:
+            self.pdf_adapter = None
+            console.print(f"[dim red]Error al instanciar PDFAdapter: {str(e)}[/dim red]")
+        
         self._show_header()
         
     def _show_header(self):
@@ -62,6 +75,8 @@ class RubricAuditorADI:
                 # 1. Ingesta
                 progress.add_task(description="[bold blue]Extrayendo conocimiento del PDF...[/bold blue]", total=None)
                 if pdf_path and os.path.exists(pdf_path):
+                    if not self.pdf_adapter:
+                        raise RuntimeError("El adaptador PDF no está inicializado. Error de empaquetado.")
                     text = self.pdf_adapter.extract_text(pdf_path)
                     source_name = os.path.basename(pdf_path)
                 else:
