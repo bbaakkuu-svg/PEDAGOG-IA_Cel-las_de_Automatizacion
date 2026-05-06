@@ -1,7 +1,13 @@
-# analyzer.py - Logica de deteccion de riesgo de abandono
+# analyzer.py - Logica de deteccion de riesgo de abandono (SLIM VERSION - NO PANDAS)
 # -------------------------------------------------------------------------
-import pandas as pd
 import os
+import csv
+
+try:
+    from openpyxl import load_workbook
+    HAS_OPENPYXL = True
+except ImportError:
+    HAS_OPENPYXL = False
 
 class RiskAnalyzer:
     def __init__(self, data_path: str):
@@ -9,64 +15,74 @@ class RiskAnalyzer:
             raise FileNotFoundError(f"No se encuentra el archivo de datos: {data_path}")
         
         self.data_path = data_path
-        self.df = self._load_data()
-        self._normalize_columns()
+        self.data = self._load_data() # Lista de dicts
 
-    def _load_data(self) -> pd.DataFrame:
-        """Carga datos desde CSV o Excel."""
+    def _load_data(self):
+        """Carga datos desde CSV o Excel sin usar pandas."""
         ext = os.path.splitext(self.data_path)[1].lower()
+        results = []
+        
         try:
             if ext == '.csv':
-                return pd.read_csv(self.data_path)
+                with open(self.data_path, mode='r', encoding='utf-8-sig') as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        results.append({k.strip().lower(): v for k, v in row.items()})
+            
             elif ext in ['.xlsx', '.xls']:
-                # Intenta leer la primera hoja por defecto
-                return pd.read_excel(self.data_path)
+                if not HAS_OPENPYXL:
+                    raise ImportError("Soporte para Excel no instalado (openpyxl).")
+                
+                wb = load_workbook(self.data_path, data_only=True)
+                ws = wb.active # Toma la hoja activa
+                headers = [str(cell.value).strip().lower() for cell in ws[1]]
+                
+                for row in ws.iter_rows(min_row=2, values_only=True):
+                    if not any(row): continue
+                    results.append(dict(zip(headers, row)))
             else:
-                raise ValueError(f"Formato de archivo no soportado: {ext}. Use .csv o .xlsx")
+                raise ValueError(f"Formato no soportado: {ext}")
+            
+            return results
         except Exception as e:
-            raise RuntimeError(f"Error al leer el archivo {ext}: {e}")
-
-    def _normalize_columns(self):
-        """Normaliza los nombres de las columnas para evitar errores de mayúsculas/minúsculas."""
-        if not self.df.empty:
-            self.df.columns = [str(c).strip().lower() for c in self.df.columns]
+            raise RuntimeError(f"Error al leer {ext}: {e}")
 
     def calculate_risk(self):
         """
-        Calcula el nivel de riesgo basado en reglas heuristicas.
+        Calcula el nivel de riesgo (vía diccionarios).
         """
-        if self.df.empty:
-            return pd.DataFrame()
-
-        results = []
-        for _, row in self.df.iterrows():
+        final_results = []
+        for row in self.data:
             score = 0
             
-            # Mapeo de columnas con fallback
-            last_login = row.get('last_login_days', row.get('login_days', 0))
-            sub_rate = row.get('submission_rate', row.get('tasa_entrega', 1.0))
-            grade = row.get('avg_grade', row.get('nota_media', 10.0))
-            posts = row.get('forum_posts', row.get('posts_foro', 5))
+            # Helper para convertir a float/int seguro
+            def safe_val(key, default=0):
+                val = row.get(key, default)
+                try:
+                    return float(val) if val is not None else default
+                except:
+                    return default
+
+            last_login = safe_val('last_login_days', safe_val('login_days', 0))
+            sub_rate = safe_val('submission_rate', safe_val('tasa_entrega', 1.0))
+            grade = safe_val('avg_grade', safe_val('nota_media', 10.0))
+            posts = safe_val('forum_posts', safe_val('posts_foro', 5))
             student_id = row.get('student_id', row.get('id', 'N/A'))
 
-            # Regla 1: Inactividad
             if last_login > 7: score += 40
-            # Regla 2: Baja tasa de entrega
             if sub_rate < 0.5: score += 30
-            # Regla 3: Notas bajas
             if grade < 5: score += 20
-            # Regla 4: Poca participacion
             if posts < 2: score += 10
 
             level = "BAJO"
             if score >= 70: level = "CRITICO"
             elif score >= 40: level = "MEDIO"
 
-            results.append({
+            final_results.append({
                 "student_id": student_id,
                 "risk_score": score,
                 "risk_level": level,
                 "action_needed": level != "BAJO"
             })
         
-        return pd.DataFrame(results)
+        return final_results

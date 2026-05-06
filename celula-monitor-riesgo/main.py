@@ -1,4 +1,4 @@
-# main.py - Monitor de Alumnos en Riesgo (EWS)
+# main.py - Monitor de Alumnos en Riesgo (EWS) - SLIM VERSION
 # -------------------------------------------------------------------------
 import os
 import sys
@@ -14,13 +14,6 @@ try:
     from rich.spinner import Spinner
 except ImportError:
     print("Error: Soporte para 'rich' no disponible. Instale 'rich'.")
-    sys.exit(1)
-
-try:
-    import pandas as pd
-except ImportError:
-    console = Console()
-    console.print("[bold red]Error: Librería 'pandas' no encontrada. Es necesaria para el Monitor de Riesgo.[/bold red]")
     sys.exit(1)
 
 try:
@@ -42,22 +35,26 @@ class RiskMonitorSEA:
         self._ensure_data_exists()
 
     def _ensure_data_exists(self):
-        """Crea un archivo de ejemplo si no existe."""
+        """Crea un archivo de ejemplo si no existe usando csv nativo."""
         if not os.path.exists("data"):
             os.makedirs("data")
         if not os.path.exists(self.default_data):
-            df = pd.DataFrame([
-                {"student_id": "ALUM001", "last_login_days": 10, "submission_rate": 0.4, "avg_grade": 4.5, "forum_posts": 1},
-                {"student_id": "ALUM002", "last_login_days": 2, "submission_rate": 0.9, "avg_grade": 8.5, "forum_posts": 5},
-                {"student_id": "ALUM003", "last_login_days": 8, "submission_rate": 0.6, "avg_grade": 5.5, "forum_posts": 0}
-            ])
-            df.to_csv(self.default_data, index=False)
+            import csv
+            data = [
+                ["student_id", "last_login_days", "submission_rate", "avg_grade", "forum_posts"],
+                ["ALUM001", 10, 0.4, 4.5, 1],
+                ["ALUM002", 2, 0.9, 8.5, 5],
+                ["ALUM003", 8, 0.6, 5.5, 0]
+            ]
+            with open(self.default_data, 'w', newline='', encoding='utf-8') as f:
+                writer = csv.writer(f)
+                writer.writerows(data)
 
     def process_data(self, path: str):
         with Live(Spinner("bouncingBar", text="Analizando patrones de riesgo..."), refresh_per_second=10) as live:
             try:
                 analyzer = RiskAnalyzer(path)
-                results = analyzer.calculate_risk()
+                results = analyzer.calculate_risk() # Lista de dicts
                 
                 time.sleep(1.2) # Efecto visual de análisis profundo
 
@@ -68,12 +65,12 @@ class RiskMonitorSEA:
                 table.add_column("Nivel de Riesgo", style="bold")
                 table.add_column("Intervención", justify="center")
 
-                for _, row in results.iterrows():
+                for row in results:
                     level = row['risk_level']
                     color = "red" if level == "CRITICO" else "yellow" if level == "MEDIO" else "green"
                     
                     table.add_row(
-                        row['student_id'],
+                        str(row['student_id']),
                         str(row['risk_score']),
                         f"[{color}]{level}[/{color}]",
                         "🚨 URGENTE" if level == "CRITICO" else "⚠️ RECOMENDADA" if level == "MEDIO" else "✅ ESTABLE"
@@ -86,8 +83,8 @@ class RiskMonitorSEA:
 
     def run_interactive(self):
         console.print(Panel.fit(
-            "[bold yellow]PEDAGOG-IA: Monitor de Alumnos en Riesgo (EWS)[/bold yellow]\n"
-            "[dim]Early Warning System v1.0 | Antigravity 2026[/dim]",
+            "[bold yellow]PEDAGOG-IA: Monitor de Alumnos en Riesgo (EWS) [SLIM][/bold yellow]\n"
+            "[dim]Early Warning System v1.1 | Antigravity 2026[/dim]",
             border_style="yellow"
         ))
 
