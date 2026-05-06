@@ -23,7 +23,7 @@ for lib in ['rich', 'openpyxl']:
 # Lista de exclusiones masiva
 excluded_modules = [
     'tkinter', 'matplotlib', 'numpy', 'pandas', 'scipy', 
-    'unittest', 'pydoc', 'email', 'http', 'xml', 'html',
+    'unittest', 'pydoc', 'email',
     'distutils', 'setuptools', 'lib2to3', 'IPython', 'PIL'
 ]
 

@@ -103,6 +103,19 @@ Este documento consolida todos los "Master Prompts" desarrollados durante la cre
 > 3. Pruebas de Interoperabilidad: ¿Qué pasa si alimento al Monitor con el output del Auditor?
 > Output: Matriz de Calidad del ecosistema, Tabla de Bugs Inter-célula y Plan de Acción a nivel de infraestructura global."
 
+### 3.3. Depuración de Crash Silencioso en Ejecutables (PyInstaller)
+**Objetivo:** Diagnosticar por qué un `.exe` se cierra inmediatamente sin mostrar errores.
+**Casos de Uso:** Tras aplicar estrategias agresivas de reducción de tamaño ("Slim Build") o cambiar de entorno.
+
+> **Instrucción Core:**
+> "Contexto: Al hacer doble clic sobre el `.exe` recién compilado, la ventana se cierra de golpe.
+> Tarea:
+> 1. Ejecución Diagnóstica: Ejecuta el binario desde una terminal (PowerShell/cmd) para capturar el Traceback.
+> 2. Identificación: Busca `ModuleNotFoundError`. Si falta una librería base (ej: `html`), es porque una dependencia visual (`rich`) la necesita.
+> 3. Corrección: Modifica el archivo `.spec` para retirar el módulo faltante de la lista `excluded_modules`.
+> 4. Recompilación: Vuelve a ejecutar PyInstaller limpiando la caché (`--clean`).
+> Output: El log de error descubierto, el `.spec` corregido y el binario funcional."
+
 ---
 
 ## Fase 4: DevOps, Build y Despliegue

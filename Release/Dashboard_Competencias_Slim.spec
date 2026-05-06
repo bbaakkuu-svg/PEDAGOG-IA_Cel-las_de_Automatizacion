@@ -14,7 +14,7 @@ datas = [
 # Lista de exclusiones masiva para "Slim Build"
 excluded_modules = [
     'tkinter', 'matplotlib', 'numpy', 'pandas', 'scipy', 
-    'unittest', 'pydoc', 'email', 'xml', 'html',
+    'unittest', 'pydoc', 'email',
     'distutils', 'setuptools', 'lib2to3', 'IPython', 'PIL'
 ]
 

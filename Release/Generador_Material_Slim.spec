@@ -25,7 +25,7 @@ for lib in ['rich', 'pydantic']:
 # Lista de exclusiones para reducir peso drásticamente
 excluded_modules = [
     'tkinter', 'matplotlib', 'numpy', 'pandas', 'scipy', 
-    'unittest', 'pydoc', 'email', 'http', 'xml', 'html',
+    'unittest', 'pydoc', 'email',
     'distutils', 'setuptools', 'lib2to3'
 ]
 
