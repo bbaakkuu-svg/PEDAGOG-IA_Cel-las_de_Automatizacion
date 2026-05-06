@@ -17,6 +17,8 @@ Este documento consolida todos los "Master Prompts" desarrollados durante la cre
    - 4.1. [Sincronización y Workflow de GitHub](#41-sincronización-y-workflow-de-github)
    - 4.2. [Estrategia "Slim Build" (Optimización de Tamaño)](#42-estrategia-slim-build-optimización-de-tamaño)
    - 4.3. [Empaquetado de Células Híbridas (Web/Backend)](#43-empaquetado-de-células-híbridas-webbackend)
+5. [Fase 5: Gestión de Conocimiento y Gobernanza](#fase-5-gestión-de-conocimiento-y-gobernanza)
+   - 5.1. [Actualización Continua de la Librería (Auto-updater)](#51-actualización-continua-de-la-librería-auto-updater)
 
 ---
 
@@ -140,3 +142,19 @@ Este documento consolida todos los "Master Prompts" desarrollados durante la cre
 > 2. Refactorizar el código de Python (`main.py`) para que resuelva las rutas usando `sys._MEIPASS` (para evitar el Error 404 al correr como binario).
 > 3. Compilar manteniendo el modo consola activo para ver los logs del servidor.
 > Output: Archivo `.spec` ajustado, `main.py` con resolución dinámica de paths y el ejecutable funcional."
+
+---
+
+## Fase 5: Gestión de Conocimiento y Gobernanza
+
+### 5.1. Actualización Continua de la Librería (Auto-updater)
+**Objetivo:** Mantener la librería de Prompts viva y actualizada de forma autónoma.
+**Casos de Uso:** Directiva de sistema o tarea final de cierre en cualquier sesión de IA.
+
+> **Instrucción Core:**
+> "Contexto: Tenemos una Librería de Prompts en `PEDAGOG-IA_Prompt_Library.md`. No debe quedar obsoleta.
+> Tarea:
+> 1. Auto-Detección: Identifica si la estrategia que acabas de usar califica como un nuevo Master Prompt.
+> 2. Inserción Continua: Añádelo al archivo Markdown bajo la fase correcta (o crea una nueva).
+> 3. Commit Inmediato: Usa las herramientas de git para guardar los cambios en el repositorio.
+> Output: Un documento siempre actualizado sin que el usuario deba pedirlo explícitamente."
