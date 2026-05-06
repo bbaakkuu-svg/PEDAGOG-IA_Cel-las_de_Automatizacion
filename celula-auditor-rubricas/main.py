@@ -20,7 +20,10 @@ from rich.panel import Panel
 from rich.progress import Progress, SpinnerColumn, TextColumn
 from rich.markdown import Markdown
 
-# Intentar importar dependencias locales
+# Gestión de dependencias con reporte de errores
+PDF_SUPPORT = False
+EXCEL_SUPPORT = False
+
 try:
     if getattr(sys, 'frozen', False):
         bundle_dir = sys._MEIPASS
@@ -37,9 +40,15 @@ try:
     except ImportError:
         from celula_auditor_rubricas.adapters.pdf_adapter import PDFAdapter
         from celula_auditor_rubricas.core.exporter import ExcelExporter
-except Exception:
-    PDFAdapter = None
-    ExcelExporter = None
+    
+    PDF_SUPPORT = True
+    EXCEL_SUPPORT = True
+except ImportError as ie:
+    # Identificar qué librería falta para informar al usuario
+    missing_lib = str(ie).split("'")[-2] if "'" in str(ie) else "una dependencia crítica"
+    # No asignamos None aquí todavía, lo manejamos en el constructor
+except Exception as e:
+    pass
 
 console = Console()
 
@@ -47,13 +56,22 @@ class RubricAuditorSEA:
     """Sistema de Evaluación Adaptativo (SEA) v4.0"""
     
     def __init__(self):
-        self.pdf_adapter = PDFAdapter() if PDFAdapter else None
+        # Inicialización defensiva
+        try:
+            self.pdf_adapter = PDFAdapter() if PDF_SUPPORT else None
+        except NameError:
+            self.pdf_adapter = None
+            
         # Directorio base para archivos persistentes
         base_dir = os.path.dirname(sys.executable if getattr(sys, 'frozen', False) else __file__)
         self.config_path = os.path.join(base_dir, "active_rubric.json")
         self.excel_path = os.path.join(base_dir, "Registro_Evaluaciones_PedagogIA.xlsx")
         
-        self.exporter = ExcelExporter(self.excel_path) if ExcelExporter else None
+        try:
+            self.exporter = ExcelExporter(self.excel_path) if EXCEL_SUPPORT else None
+        except NameError:
+            self.exporter = None
+            
         self._show_header()
         
     def _show_header(self):
@@ -83,7 +101,14 @@ class RubricAuditorSEA:
     def _ingest_rubric(self, path):
         try:
             console.print(f"\n[bold blue]⚙️ Configurando nueva rúbrica desde:[/bold blue] {os.path.basename(path)}")
-            text = self.pdf_adapter.extract_text(path) if path.lower().endswith(".pdf") else open(path, 'r', encoding='utf-8').read()
+            
+            # Validación preventiva para PDF
+            if path.lower().endswith(".pdf"):
+                if not self.pdf_adapter:
+                    raise RuntimeError("Soporte para PDF no disponible. Instale 'pymupdf'.")
+                text = self.pdf_adapter.extract_text(path)
+            else:
+                text = open(path, 'r', encoding='utf-8').read()
             
             rubric_data = {
                 "source": os.path.basename(path),
@@ -116,7 +141,13 @@ class RubricAuditorSEA:
             with Progress(SpinnerColumn(), TextColumn("[progress.description]{task.description}"), transient=True) as progress:
                 progress.add_task(description=f"[bold blue]Evaluando: {os.path.basename(path)}...[/bold blue]", total=None)
                 
-                work_text = self.pdf_adapter.extract_text(path) if path.lower().endswith(".pdf") else open(path, 'r', encoding='utf-8').read()
+                # Validación preventiva para PDF
+                if path.lower().endswith(".pdf"):
+                    if not self.pdf_adapter:
+                        raise RuntimeError("Soporte para PDF no disponible. Instale 'pymupdf'.")
+                    work_text = self.pdf_adapter.extract_text(path)
+                else:
+                    work_text = open(path, 'r', encoding='utf-8').read()
                 time.sleep(2)
                 
                 results = self._perform_comparative_analysis(work_text, rubric)
@@ -177,7 +208,12 @@ class RubricAuditorSEA:
         
         feedback_text = "\n".join([f"• {d['criterio']}: {d['feedback']}" for d in results['detalles']])
         console.print(Panel(feedback_text, title="💬 FEEDBACK PEDAGÓGICO", border_style="yellow"))
-        console.print(f"[bold green]📊 Registro exportado a Excel:[/bold green] [dim]{os.path.basename(self.excel_path)}[/dim]")
+        
+        if self.exporter:
+            console.print(f"[bold green]📊 Registro exportado a Excel:[/bold green] [dim]{os.path.basename(self.excel_path)}[/dim]")
+        else:
+            console.print("[bold yellow]⚠️ Registro Excel omitido (soporte no disponible).[/bold yellow]")
+            
         console.print("\n[dim center]SEA Engine v4.0 | Docensas 2026[/dim center]")
 
     def _evaluate_demo(self):
