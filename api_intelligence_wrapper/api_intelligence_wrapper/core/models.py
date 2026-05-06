@@ -2,8 +2,8 @@ from pydantic import BaseModel, Field, field_validator
 from datetime import datetime
 from typing import Optional
 
-class DocensaAsset(BaseModel):
-    """Modelo de datos unificado para un activo de Docensas."""
+class PedagogiaAsset(BaseModel):
+    """Modelo de datos unificado para un activo de Pedagog-ia."""
     id: str
     title: str = Field(..., alias="display_name")
     category: str

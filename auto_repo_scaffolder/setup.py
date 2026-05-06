@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="auto-repo-scaffolder",
     version="0.1.0",
-    author="Antigravity Célula Docensas",
+    author="Antigravity Célula Pedagog-ia",
     description="Automatización para la creación de repositorios bajo el estándar Reitz y Arquitectura Limpia.",
     packages=find_packages(),
     install_requires=[

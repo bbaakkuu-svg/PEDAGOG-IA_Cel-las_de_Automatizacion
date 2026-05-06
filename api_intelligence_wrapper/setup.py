@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="api-intelligence-wrapper",
     version="0.1.0",
-    author="Antigravity Célula Docensas",
+    author="Antigravity Célula Pedagog-ia",
     description="Facade Pattern para simplificar integraciones de APIs complejas.",
     packages=find_packages(),
     install_requires=[

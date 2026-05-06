@@ -11,7 +11,7 @@ class CloudNativeScheduler:
         self.executor = executor
 
     def schedule_daily_report(self):
-        task_name = "Generate_Docensas_KPI_Report"
-        payload = {"format": "PDF", "recipients": ["admin@docensas.com"]}
+        task_name = "Generate_Pedagogia_KPI_Report"
+        payload = {"format": "PDF", "recipients": ["admin@pedagog-ia.com"]}
         
         return self.executor.run(task_name, payload)

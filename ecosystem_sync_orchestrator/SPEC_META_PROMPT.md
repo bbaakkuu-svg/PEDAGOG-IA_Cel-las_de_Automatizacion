@@ -1,7 +1,7 @@
 # 🔄 Especificación Técnica: Ecosystem Sync Orchestrator
 
 ## 🎯 Objetivo de Autoridad
-Demostrar la **Versatilidad de Despliegue**. Este activo debe probar que el ecosistema Docensas es capaz de persistir y distribuirse bajo múltiples protocolos (Git, S3, FTP) sin alterar el orquestador principal.
+Demostrar la **Versatilidad de Despliegue**. Este activo debe probar que el ecosistema Pedagog-ia es capaz de persistir y distribuirse bajo múltiples protocolos (Git, S3, FTP) sin alterar el orquestador principal.
 
 ## 🛠️ Requisitos de Arquitectura (Strategy Pattern Edition)
 1.  **Strategy Interface**: Definir una interfaz `SyncStrategy` que obligue a implementar métodos como `push()` y `pull()`.

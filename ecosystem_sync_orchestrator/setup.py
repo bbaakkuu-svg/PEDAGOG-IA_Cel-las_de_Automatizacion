@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="ecosystem-sync-orchestrator",
     version="0.1.0",
-    author="Antigravity Célula Docensas",
+    author="Antigravity Célula Pedagog-ia",
     description="Orquestador multi-estrategia para la sincronización de activos de automatización.",
     packages=find_packages(),
     install_requires=[

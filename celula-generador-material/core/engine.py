@@ -1,11 +1,11 @@
 # engine.py - Motor de transformacion de contenidos
 # -------------------------------------------------------------------------
-from api_intelligence_wrapper.facade import DocensasIntelligenceFacade
+from api_intelligence_wrapper.facade import PedagogiaIntelligenceFacade
 import json
 
 class ContentEngine:
     def __init__(self):
-        self.ai = DocensasIntelligenceFacade(api_token="DEV_TOKEN")
+        self.ai = PedagogiaIntelligenceFacade(api_token="DEV_TOKEN")
 
     def generate_quiz(self, content_text: str):
         """
@@ -15,12 +15,12 @@ class ContentEngine:
         # Aqui se llamaria al LLM con un prompt especifico
         return [
             {
-                "question": "Â¿Cual es el objetivo principal de la CǸlula Docensas?",
+                "question": "¿Cual es el objetivo principal de la Célula Pedagog-ia?",
                 "options": ["Automatizacion", "Docencia", "Investigacion", "Todas las anteriores"],
                 "answer": "Todas las anteriores"
             },
             {
-                "question": "Â¿Que framework utiliza el Scaffolder?",
+                "question": "¿Que framework utiliza el Scaffolder?",
                 "options": ["Django", "Kenneth Reitz", "Flask", "FastAPI"],
                 "answer": "Kenneth Reitz"
             }

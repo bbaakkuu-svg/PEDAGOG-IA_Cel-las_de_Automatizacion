@@ -45,10 +45,10 @@ try:
     EXCEL_SUPPORT = True
 except ImportError as ie:
     # Identificar qué librería falta para informar al usuario
-    missing_lib = str(ie).split("'")[-2] if "'" in str(ie) else "una dependencia crítica"
-    # No asignamos None aquí todavía, lo manejamos en el constructor
+    missing_lib = str(ie).split("'")[-2] if "'" in str(ie) else str(ie)
+    console.print(f"[dim]Nota: No se pudo cargar la librería '{missing_lib}'.[/dim]")
 except Exception as e:
-    pass
+    console.print(f"[dim]Error inesperado en carga de módulos: {str(e)}[/dim]")
 
 console = Console()
 
@@ -214,7 +214,7 @@ class RubricAuditorSEA:
         else:
             console.print("[bold yellow]⚠️ Registro Excel omitido (soporte no disponible).[/bold yellow]")
             
-        console.print("\n[dim center]SEA Engine v4.0 | Docensas 2026[/dim center]")
+        console.print("\n[dim center]SEA Engine v4.0 | Pedagog-ia 2026[/dim center]")
 
     def _evaluate_demo(self):
         console.print("\n[dim]Modo SEA v4.0 Activo. Arrastre archivos para iniciar el registro masivo.[/dim]")

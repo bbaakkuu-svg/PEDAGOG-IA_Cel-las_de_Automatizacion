@@ -13,7 +13,7 @@ def main():
     try:
         config = RepoConfig(
             project_name="nuevo_modulo_automatizacion",
-            description="Automatización de alto nivel para procesos internos de Docensas."
+            description="Automatización de alto nivel para procesos internos de Pedagog-ia."
         )
         
         scaffolder = RepoScaffolder(FileSystemAdapter())

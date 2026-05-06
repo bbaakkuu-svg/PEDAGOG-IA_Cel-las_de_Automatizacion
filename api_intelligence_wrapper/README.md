@@ -15,8 +15,8 @@ pip install -e .
 
 ### Uso Básico
 ```python
-from api_intelligence_wrapper.facade import DocensasIntelligenceFacade
-ai = DocensasIntelligenceFacade(api_token="TU_TOKEN")
+from api_intelligence_wrapper.facade import PedagogiaIntelligenceFacade
+ai = PedagogiaIntelligenceFacade(api_token="TU_TOKEN")
 assets = ai.fetch_active_assets()
 ```
 

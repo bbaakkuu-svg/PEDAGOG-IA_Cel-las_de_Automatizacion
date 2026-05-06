@@ -1,7 +1,7 @@
 from typing import List
-from .core.models import DocensaAsset
+from .core.models import PedagogiaAsset
 
-class DocensasAPIClient:
+class PedagogiaAPIClient:
     """Simulación de un cliente de API de bajo nivel con complejidad."""
     def get_raw_data(self, token: str):
         # Imagina una respuesta JSON cruda y desordenada
@@ -10,14 +10,14 @@ class DocensasAPIClient:
             {"id": "102", "display_name": "Taller Pydantic", "category": "DevOps", "last_updated": "2024-05-02T12:00:00Z", "status": "pending"}
         ]
 
-class DocensasIntelligenceFacade:
+class PedagogiaIntelligenceFacade:
     """La Facade: El punto de entrada simplificado."""
     
     def __init__(self, api_token: str):
-        self._client = DocensasAPIClient()
+        self._client = PedagogiaAPIClient()
         self._token = api_token
 
-    def fetch_active_assets(self) -> List[DocensaAsset]:
+    def fetch_active_assets(self) -> List[PedagogiaAsset]:
         """
         Punto de entrada único que maneja:
         1. Autenticación.
@@ -26,5 +26,5 @@ class DocensasIntelligenceFacade:
         4. Modelado y validación.
         """
         raw_data = self._client.get_raw_data(self._token)
-        assets = [DocensaAsset(**item) for item in raw_data]
+        assets = [PedagogiaAsset(**item) for item in raw_data]
         return [a for a in assets if a.status == "active"]
