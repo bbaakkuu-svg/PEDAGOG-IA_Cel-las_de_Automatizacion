@@ -6,8 +6,14 @@ import json
 import threading
 
 PORT = 8000
-DIRECTORY = "web"
-DATA_FILE = "data/competencias.json"
+# Resolución de directorios para PyInstaller
+if getattr(sys, 'frozen', False):
+    base_dir = sys._MEIPASS
+else:
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+
+DIRECTORY = os.path.join(base_dir, "web")
+DATA_FILE = os.path.join(base_dir, "data", "competencias.json")
 
 class DashboardHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
@@ -19,7 +25,7 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header('Content-type', 'application/json')
             self.end_headers()
             try:
-                with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), DATA_FILE), 'r', encoding='utf-8') as f:
+                with open(DATA_FILE, 'r', encoding='utf-8') as f:
                     self.wfile.write(f.read().encode())
             except FileNotFoundError:
                 # Fallback genérico si falla
@@ -28,13 +34,14 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             super().do_GET()
 
 def _ensure_data():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
     data_dir = os.path.join(base_dir, "data")
     if not os.path.exists(data_dir):
-        os.makedirs(data_dir)
+        try:
+            os.makedirs(data_dir)
+        except OSError:
+            pass # Silencioso si ocurre un error de permisos en tmp
     
-    data_path = os.path.join(base_dir, DATA_FILE)
-    if not os.path.exists(data_path):
+    if not os.path.exists(DATA_FILE):
         # Datos iniciales para la industrialización
         mock_data = {
             "student_name": "Ana Rodriguez",
@@ -48,8 +55,11 @@ def _ensure_data():
             ],
             "ai_insight": "Ana muestra un dominio excepcional en habilidades técnicas (Arquitectura e IA). Se sugiere fomentar el liderazgo en proyectos colaborativos."
         }
-        with open(data_path, 'w', encoding='utf-8') as f:
-            json.dump(mock_data, f, indent=4)
+        try:
+            with open(DATA_FILE, 'w', encoding='utf-8') as f:
+                json.dump(mock_data, f, indent=4)
+        except OSError:
+            pass # Si no hay permisos de escritura, no podemos guardarlo, usaremos el mock
 
 def run_dashboard():
     _ensure_data()
