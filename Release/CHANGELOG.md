@@ -13,8 +13,10 @@
 - Empaquetado binario autocontenido mediante PyInstaller.
 
 ### 🐛 Correcciones
-- Solucionado el problema de codificación de caracteres especiales en consolas Windows.
-- Corregida la detección de rutas de archivos con espacios.
+- Solucionado el error crítico `UnicodeEncodeError` en consolas Windows (UTF-8 Enforcing).
+- Implementada pausa de seguridad (`input()`) para evitar el cierre instantáneo de la consola.
+- Añadida robustez en la carga de módulos y manejo de excepciones en `main.py`.
+- Sincronizada dependencia `pymupdf` en el manifiesto global.
 
 ---
 *Célula de Automatización | v1.0-Release*

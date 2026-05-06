@@ -1,1 +1,5 @@
-﻿pydantic\njinja2\nrich\ngh-cli
+pydantic
+jinja2
+rich
+gh-cli
+pymupdf
