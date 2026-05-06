@@ -14,9 +14,10 @@ a = Analysis(
     binaries=binaries,
     datas=[
         ('..\\celula-auditor-rubricas\\adapters\\*.py', 'adapters'),
+        ('..\\celula-auditor-rubricas\\core\\*.py', 'core'),
         ('..\\celula-auditor-rubricas\\prompts\\*.md', 'prompts'),
     ] + datas,
-    hiddenimports=['adapters.pdf_adapter'] + hiddenimports,
+    hiddenimports=['adapters.pdf_adapter', 'core.exporter', 'openpyxl', 'openpyxl.workbook'] + hiddenimports,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
