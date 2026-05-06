@@ -211,6 +211,10 @@ class RubricAuditorSEA:
         
         if self.exporter:
             console.print(f"[bold green]📊 Registro exportado a Excel:[/bold green] [dim]{os.path.basename(self.excel_path)}[/dim]")
+            try:
+                os.startfile(self.excel_path) # Auto-abrir reporte
+            except:
+                pass
         else:
             console.print("[bold yellow]⚠️ Registro Excel omitido (soporte no disponible).[/bold yellow]")
             

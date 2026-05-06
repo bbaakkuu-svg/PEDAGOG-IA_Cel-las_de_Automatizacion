@@ -58,14 +58,23 @@ class MaterialGeneratorSEA:
                 
                 time.sleep(1) # Simulación de procesamiento
                 
-                # Guardar resultados
+                # Guardar resultados JSON
                 output_filename = f"material_{int(time.time())}.json"
                 output_path = os.path.join(self.output_dir, output_filename)
                 
                 with open(output_path, "w", encoding="utf-8") as f:
                     json.dump({"summary": summary, "quiz": quiz}, f, indent=4, ensure_ascii=False)
+
+                # Guardar resultados TXT (Lectura humana)
+                txt_path = output_path.replace(".json", ".txt")
+                with open(txt_path, "w", encoding="utf-8") as f:
+                    f.write(f"{summary}\n\n{'='*50}\n📝 CUESTIONARIO:\n")
+                    for i, q in enumerate(quiz, 1):
+                        f.write(f"\n{i}. {q['question']}\n")
+                        for opt in q['options']:
+                            f.write(f"   - {opt}\n")
                 
-                live.update(Panel(f"[bold green]✔ Proceso completado exitosamente[/bold green]\n[dim]Archivo: {output_path}[/dim]", border_style="green"))
+                live.update(Panel(f"[bold green]✔ Proceso completado exitosamente[/bold green]\n[dim]Archivos: .json y .txt[/dim]", border_style="green"))
                 
                 # Mostrar vista previa
                 console.print(Panel(summary, title="[bold blue]Resumen Ejecutivo[/bold blue]", expand=False))
