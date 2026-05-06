@@ -1,7 +1,13 @@
 # 📝 Changelog: Auditor de Rúbricas MVP
 
-## [1.0.0] - 2026-05-05
+## [2.0.0] - 2026-05-06
+### ✨ Características ADI (Auditor Dinámico Inteligente)
+- **Lógica Dinámica**: El análisis ahora depende del contenido real del PDF (arquitectura, tecnología, estándares).
+- **Feedback Formativo**: Nuevo panel dedicado con mensajes pedagógicos para el alumno.
+- **Evidencia Documental**: Localización y visualización de fragmentos de texto detectados.
+- **ADI v2.0 Engine**: Refactorización completa para mayor precisión y robustez.
 
+## [1.0.0] - 2026-05-05
 ### ✨ Características
 - **Motor de Ingesta**: Soporte inicial para extracción de texto en archivos PDF.
 - **Lógica de Auditoría**: Implementación de flujo de razonamiento Chain of Thought (CoT).
@@ -19,4 +25,4 @@
 - Sincronizada dependencia `pymupdf` en el manifiesto global.
 
 ---
-*Célula de Automatización | v1.0-Release*
+*Célula de Automatización | v2.0-Release*
