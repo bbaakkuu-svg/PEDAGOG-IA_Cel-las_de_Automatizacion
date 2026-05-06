@@ -33,7 +33,7 @@ block_cipher = None
 
 a = Analysis(
     [os.path.join(cell_path, 'main.py')],
-    pathex=[project_root, cell_path, os.path.join(project_root, 'api_intelligence_wrapper')],
+    pathex=[cell_path, os.path.join(project_root, 'api_intelligence_wrapper')],
     binaries=binaries,
     datas=datas,
     hiddenimports=hiddenimports,

@@ -22,6 +22,7 @@ imports:
  &#8226;   <a href="#_weakrefset">_weakrefset</a>
  &#8226;   <a href="#abc">abc</a>
  &#8226;   <a href="#api_intelligence_wrapper">api_intelligence_wrapper</a>
+ &#8226;   <a href="#api_intelligence_wrapper.facade">api_intelligence_wrapper.facade</a>
  &#8226;   <a href="#codecs">codecs</a>
  &#8226;   <a href="#collections">collections</a>
  &#8226;   <a href="#copyreg">copyreg</a>
@@ -546,17 +547,6 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="'api_intelligence_wrapper.facade'"></a>
-  <a target="code" href="" type="text/plain"><tt>'api_intelligence_wrapper.facade'</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#core.engine">core.engine</a>
-
-  </div>
-
-</div>
-
-<div class="node">
   <a name="'collections.abc'"></a>
   <a target="code" href="" type="text/plain"><tt>'collections.abc'</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
@@ -676,41 +666,6 @@ imported by:
  &#8226;   <a href="#typing_inspection.introspection">typing_inspection.introspection</a>
  &#8226;   <a href="#typing_inspection.typing_objects">typing_inspection.typing_objects</a>
  &#8226;   <a href="#xml.etree.ElementTree">xml.etree.ElementTree</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="'email.message'"></a>
-  <a target="code" href="" type="text/plain"><tt>'email.message'</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#http.client">http.client</a>
- &#8226;   <a href="#httpx._models">httpx._models</a>
- &#8226;   <a href="#importlib.metadata._adapters">importlib.metadata._adapters</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="'email.parser'"></a>
-  <a target="code" href="" type="text/plain"><tt>'email.parser'</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#http.client">http.client</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="'email.utils'"></a>
-  <a target="code" href="" type="text/plain"><tt>'email.utils'</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#urllib.request">urllib.request</a>
 
   </div>
 
@@ -5002,6 +4957,7 @@ imported by:
  &#8226;   <a href="#contextlib">contextlib</a>
  &#8226;   <a href="#dataclasses">dataclasses</a>
  &#8226;   <a href="#dotenv.variables">dotenv.variables</a>
+ &#8226;   <a href="#email._policybase">email._policybase</a>
  &#8226;   <a href="#functools">functools</a>
  &#8226;   <a href="#h11._events">h11._events</a>
  &#8226;   <a href="#importlib._abc">importlib._abc</a>
@@ -6171,10 +6127,67 @@ imported by:
 
 <div class="node">
   <a name="api_intelligence_wrapper"></a>
-  <a target="code" href="///C:/Users/LENOVO/Desktop/REPOSITORIOS/PEDAGOG-IA_Cel-las_de_Automatizacion/api_intelligence_wrapper/__init__.py" type="text/plain"><tt>api_intelligence_wrapper</tt></a>
+  <a target="code" href="///C:/Users/LENOVO/Desktop/REPOSITORIOS/PEDAGOG-IA_Cel-las_de_Automatizacion/api_intelligence_wrapper/api_intelligence_wrapper/__init__.py" type="text/plain"><tt>api_intelligence_wrapper</tt></a>
 <span class="moduletype">Package</span>  <div class="import">
 imported by:
-    <a href="#main.py">main.py</a>
+    <a href="#api_intelligence_wrapper.core">api_intelligence_wrapper.core</a>
+ &#8226;   <a href="#api_intelligence_wrapper.facade">api_intelligence_wrapper.facade</a>
+ &#8226;   <a href="#main.py">main.py</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="api_intelligence_wrapper.core"></a>
+  <a target="code" href="///C:/Users/LENOVO/Desktop/REPOSITORIOS/PEDAGOG-IA_Cel-las_de_Automatizacion/api_intelligence_wrapper/api_intelligence_wrapper/core/__init__.py" type="text/plain"><tt>api_intelligence_wrapper.core</tt></a>
+<span class="moduletype">Package</span>  <div class="import">
+imports:
+    <a href="#api_intelligence_wrapper">api_intelligence_wrapper</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#api_intelligence_wrapper.core.models">api_intelligence_wrapper.core.models</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="api_intelligence_wrapper.core.models"></a>
+  <a target="code" href="///C:/Users/LENOVO/Desktop/REPOSITORIOS/PEDAGOG-IA_Cel-las_de_Automatizacion/api_intelligence_wrapper/api_intelligence_wrapper/core/models.py" type="text/plain"><tt>api_intelligence_wrapper.core.models</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#api_intelligence_wrapper.core">api_intelligence_wrapper.core</a>
+ &#8226;   <a href="#datetime">datetime</a>
+ &#8226;   <a href="#pydantic">pydantic</a>
+ &#8226;   <a href="#pydantic.BaseModel">pydantic.BaseModel</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#api_intelligence_wrapper.facade">api_intelligence_wrapper.facade</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="api_intelligence_wrapper.facade"></a>
+  <a target="code" href="///C:/Users/LENOVO/Desktop/REPOSITORIOS/PEDAGOG-IA_Cel-las_de_Automatizacion/api_intelligence_wrapper/api_intelligence_wrapper/facade.py" type="text/plain"><tt>api_intelligence_wrapper.facade</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#api_intelligence_wrapper">api_intelligence_wrapper</a>
+ &#8226;   <a href="#api_intelligence_wrapper.core.models">api_intelligence_wrapper.core.models</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#core.engine">core.engine</a>
+ &#8226;   <a href="#main.py">main.py</a>
 
   </div>
 
@@ -7622,6 +7635,9 @@ imported by:
  &#8226;   <a href="#dns.rdtypes.dnskeybase">dns.rdtypes.dnskeybase</a>
  &#8226;   <a href="#dns.rdtypes.svcbbase">dns.rdtypes.svcbbase</a>
  &#8226;   <a href="#dns.tsig">dns.tsig</a>
+ &#8226;   <a href="#email._encoded_words">email._encoded_words</a>
+ &#8226;   <a href="#email.base64mime">email.base64mime</a>
+ &#8226;   <a href="#email.encoders">email.encoders</a>
  &#8226;   <a href="#encodings.base64_codec">encodings.base64_codec</a>
  &#8226;   <a href="#httpcore._async.http_proxy">httpcore._async.http_proxy</a>
  &#8226;   <a href="#httpcore._models">httpcore._models</a>
@@ -7656,6 +7672,11 @@ imported by:
  &#8226;   <a href="#dns.rdtypes.euibase">dns.rdtypes.euibase</a>
  &#8226;   <a href="#dns.rdtypes.tlsabase">dns.rdtypes.tlsabase</a>
  &#8226;   <a href="#dns.reversename">dns.reversename</a>
+ &#8226;   <a href="#email._encoded_words">email._encoded_words</a>
+ &#8226;   <a href="#email.base64mime">email.base64mime</a>
+ &#8226;   <a href="#email.contentmanager">email.contentmanager</a>
+ &#8226;   <a href="#email.header">email.header</a>
+ &#8226;   <a href="#email.message">email.message</a>
  &#8226;   <a href="#encodings.hex_codec">encodings.hex_codec</a>
  &#8226;   <a href="#encodings.uu_codec">encodings.uu_codec</a>
  &#8226;   <a href="#quopri">quopri</a>
@@ -7786,6 +7807,7 @@ imported by:
     <a href="#PIL.PdfParser">PIL.PdfParser</a>
  &#8226;   <a href="#_strptime">_strptime</a>
  &#8226;   <a href="#dns.rdtypes.ANY.RRSIG">dns.rdtypes.ANY.RRSIG</a>
+ &#8226;   <a href="#email._parseaddr">email._parseaddr</a>
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
  &#8226;   <a href="#ssl">ssl</a>
  &#8226;   <a href="#zoneinfo._zoneinfo">zoneinfo._zoneinfo</a>
@@ -8564,6 +8586,7 @@ imported by:
  &#8226;   <a href="#dns.rdtypes.util">dns.rdtypes.util</a>
  &#8226;   <a href="#dns.transaction">dns.transaction</a>
  &#8226;   <a href="#dotenv.main">dotenv.main</a>
+ &#8226;   <a href="#email.feedparser">email.feedparser</a>
  &#8226;   <a href="#functools">functools</a>
  &#8226;   <a href="#httpx._urls">httpx._urls</a>
  &#8226;   <a href="#importlib.metadata">importlib.metadata</a>
@@ -9238,6 +9261,7 @@ imported by:
  &#8226;   <a href="#dataclasses">dataclasses</a>
  &#8226;   <a href="#dns.name">dns.name</a>
  &#8226;   <a href="#dns.quic._common">dns.quic._common</a>
+ &#8226;   <a href="#email.generator">email.generator</a>
  &#8226;   <a href="#gettext">gettext</a>
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
  &#8226;   <a href="#pydantic._internal._dataclasses">pydantic._internal._dataclasses</a>
@@ -9303,7 +9327,7 @@ imported by:
   <a target="code" href="///C:/Users/LENOVO/Desktop/REPOSITORIOS/PEDAGOG-IA_Cel-las_de_Automatizacion/celula-generador-material/core/engine.py" type="text/plain"><tt>core.engine</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#'api_intelligence_wrapper.facade'">'api_intelligence_wrapper.facade'</a>
+    <a href="#api_intelligence_wrapper.facade">api_intelligence_wrapper.facade</a>
  &#8226;   <a href="#core">core</a>
  &#8226;   <a href="#json">json</a>
 
@@ -9663,8 +9687,10 @@ imported by:
     <a href="#PIL._imagingcms">PIL._imagingcms</a>
  &#8226;   <a href="#_strptime">_strptime</a>
  &#8226;   <a href="#annotated_types">annotated_types</a>
+ &#8226;   <a href="#api_intelligence_wrapper.core.models">api_intelligence_wrapper.core.models</a>
  &#8226;   <a href="#calendar">calendar</a>
  &#8226;   <a href="#click.types">click.types</a>
+ &#8226;   <a href="#email.utils">email.utils</a>
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
  &#8226;   <a href="#httpx._client">httpx._client</a>
  &#8226;   <a href="#httpx._models">httpx._models</a>
@@ -13558,10 +13584,471 @@ imported by:
 
 <div class="node">
   <a name="email"></a>
-  <a target="code" href="" type="text/plain"><tt>email</tt></a>
-<span class="moduletype">ExcludedModule</span>  <div class="import">
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/__init__.py" type="text/plain"><tt>email</tt></a>
+<span class="moduletype">Package</span>  <div class="import">
+imports:
+    <a href="#email._header_value_parser">email._header_value_parser</a>
+ &#8226;   <a href="#email.charset">email.charset</a>
+ &#8226;   <a href="#email.errors">email.errors</a>
+ &#8226;   <a href="#email.header">email.header</a>
+ &#8226;   <a href="#email.parser">email.parser</a>
+
+  </div>
+  <div class="import">
 imported by:
-    <a href="#importlib.metadata">importlib.metadata</a>
+    <a href="#email._encoded_words">email._encoded_words</a>
+ &#8226;   <a href="#email._header_value_parser">email._header_value_parser</a>
+ &#8226;   <a href="#email._parseaddr">email._parseaddr</a>
+ &#8226;   <a href="#email._policybase">email._policybase</a>
+ &#8226;   <a href="#email.base64mime">email.base64mime</a>
+ &#8226;   <a href="#email.charset">email.charset</a>
+ &#8226;   <a href="#email.contentmanager">email.contentmanager</a>
+ &#8226;   <a href="#email.encoders">email.encoders</a>
+ &#8226;   <a href="#email.errors">email.errors</a>
+ &#8226;   <a href="#email.feedparser">email.feedparser</a>
+ &#8226;   <a href="#email.generator">email.generator</a>
+ &#8226;   <a href="#email.header">email.header</a>
+ &#8226;   <a href="#email.headerregistry">email.headerregistry</a>
+ &#8226;   <a href="#email.iterators">email.iterators</a>
+ &#8226;   <a href="#email.message">email.message</a>
+ &#8226;   <a href="#email.parser">email.parser</a>
+ &#8226;   <a href="#email.policy">email.policy</a>
+ &#8226;   <a href="#email.quoprimime">email.quoprimime</a>
+ &#8226;   <a href="#email.utils">email.utils</a>
+ &#8226;   <a href="#importlib.metadata">importlib.metadata</a>
+ &#8226;   <a href="#urllib.request">urllib.request</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="email._encoded_words"></a>
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/_encoded_words.py" type="text/plain"><tt>email._encoded_words</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#base64">base64</a>
+ &#8226;   <a href="#binascii">binascii</a>
+ &#8226;   <a href="#email">email</a>
+ &#8226;   <a href="#email.errors">email.errors</a>
+ &#8226;   <a href="#functools">functools</a>
+ &#8226;   <a href="#re">re</a>
+ &#8226;   <a href="#string">string</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#email._header_value_parser">email._header_value_parser</a>
+ &#8226;   <a href="#email.message">email.message</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="email._header_value_parser"></a>
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/_header_value_parser.py" type="text/plain"><tt>email._header_value_parser</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#email">email</a>
+ &#8226;   <a href="#email._encoded_words">email._encoded_words</a>
+ &#8226;   <a href="#email.errors">email.errors</a>
+ &#8226;   <a href="#email.utils">email.utils</a>
+ &#8226;   <a href="#operator">operator</a>
+ &#8226;   <a href="#re">re</a>
+ &#8226;   <a href="#string">string</a>
+ &#8226;   <a href="#sys">sys</a>
+ &#8226;   <a href="#urllib">urllib</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#email">email</a>
+ &#8226;   <a href="#email.headerregistry">email.headerregistry</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="email._parseaddr"></a>
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/_parseaddr.py" type="text/plain"><tt>email._parseaddr</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#calendar">calendar</a>
+ &#8226;   <a href="#email">email</a>
+ &#8226;   <a href="#time">time</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#email.utils">email.utils</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="email._policybase"></a>
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/_policybase.py" type="text/plain"><tt>email._policybase</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#abc">abc</a>
+ &#8226;   <a href="#email">email</a>
+ &#8226;   <a href="#email.charset">email.charset</a>
+ &#8226;   <a href="#email.header">email.header</a>
+ &#8226;   <a href="#email.utils">email.utils</a>
+ &#8226;   <a href="#re">re</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#email.feedparser">email.feedparser</a>
+ &#8226;   <a href="#email.message">email.message</a>
+ &#8226;   <a href="#email.parser">email.parser</a>
+ &#8226;   <a href="#email.policy">email.policy</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="email.base64mime"></a>
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/base64mime.py" type="text/plain"><tt>email.base64mime</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#base64">base64</a>
+ &#8226;   <a href="#binascii">binascii</a>
+ &#8226;   <a href="#email">email</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#email.charset">email.charset</a>
+ &#8226;   <a href="#email.header">email.header</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="email.charset"></a>
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/charset.py" type="text/plain"><tt>email.charset</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#email">email</a>
+ &#8226;   <a href="#email.base64mime">email.base64mime</a>
+ &#8226;   <a href="#email.encoders">email.encoders</a>
+ &#8226;   <a href="#email.errors">email.errors</a>
+ &#8226;   <a href="#email.quoprimime">email.quoprimime</a>
+ &#8226;   <a href="#functools">functools</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#email">email</a>
+ &#8226;   <a href="#email._policybase">email._policybase</a>
+ &#8226;   <a href="#email.contentmanager">email.contentmanager</a>
+ &#8226;   <a href="#email.header">email.header</a>
+ &#8226;   <a href="#email.message">email.message</a>
+ &#8226;   <a href="#email.utils">email.utils</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="email.contentmanager"></a>
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/contentmanager.py" type="text/plain"><tt>email.contentmanager</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#binascii">binascii</a>
+ &#8226;   <a href="#email">email</a>
+ &#8226;   <a href="#email.charset">email.charset</a>
+ &#8226;   <a href="#email.errors">email.errors</a>
+ &#8226;   <a href="#email.message">email.message</a>
+ &#8226;   <a href="#email.quoprimime">email.quoprimime</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#email.policy">email.policy</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="email.encoders"></a>
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/encoders.py" type="text/plain"><tt>email.encoders</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#base64">base64</a>
+ &#8226;   <a href="#email">email</a>
+ &#8226;   <a href="#quopri">quopri</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#email.charset">email.charset</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="email.errors"></a>
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/errors.py" type="text/plain"><tt>email.errors</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#email">email</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#email">email</a>
+ &#8226;   <a href="#email._encoded_words">email._encoded_words</a>
+ &#8226;   <a href="#email._header_value_parser">email._header_value_parser</a>
+ &#8226;   <a href="#email.charset">email.charset</a>
+ &#8226;   <a href="#email.contentmanager">email.contentmanager</a>
+ &#8226;   <a href="#email.feedparser">email.feedparser</a>
+ &#8226;   <a href="#email.generator">email.generator</a>
+ &#8226;   <a href="#email.header">email.header</a>
+ &#8226;   <a href="#email.headerregistry">email.headerregistry</a>
+ &#8226;   <a href="#email.message">email.message</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="email.feedparser"></a>
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/feedparser.py" type="text/plain"><tt>email.feedparser</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#collections">collections</a>
+ &#8226;   <a href="#email">email</a>
+ &#8226;   <a href="#email._policybase">email._policybase</a>
+ &#8226;   <a href="#email.errors">email.errors</a>
+ &#8226;   <a href="#email.message">email.message</a>
+ &#8226;   <a href="#io">io</a>
+ &#8226;   <a href="#re">re</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#email.parser">email.parser</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="email.generator"></a>
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/generator.py" type="text/plain"><tt>email.generator</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#copy">copy</a>
+ &#8226;   <a href="#email">email</a>
+ &#8226;   <a href="#email.errors">email.errors</a>
+ &#8226;   <a href="#email.utils">email.utils</a>
+ &#8226;   <a href="#io">io</a>
+ &#8226;   <a href="#random">random</a>
+ &#8226;   <a href="#re">re</a>
+ &#8226;   <a href="#sys">sys</a>
+ &#8226;   <a href="#time">time</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#email.message">email.message</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="email.header"></a>
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/header.py" type="text/plain"><tt>email.header</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#binascii">binascii</a>
+ &#8226;   <a href="#email">email</a>
+ &#8226;   <a href="#email.base64mime">email.base64mime</a>
+ &#8226;   <a href="#email.charset">email.charset</a>
+ &#8226;   <a href="#email.errors">email.errors</a>
+ &#8226;   <a href="#email.quoprimime">email.quoprimime</a>
+ &#8226;   <a href="#re">re</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#email">email</a>
+ &#8226;   <a href="#email._policybase">email._policybase</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="email.headerregistry"></a>
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/headerregistry.py" type="text/plain"><tt>email.headerregistry</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#email">email</a>
+ &#8226;   <a href="#email._header_value_parser">email._header_value_parser</a>
+ &#8226;   <a href="#email.errors">email.errors</a>
+ &#8226;   <a href="#email.utils">email.utils</a>
+ &#8226;   <a href="#types">types</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#email.policy">email.policy</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="email.iterators"></a>
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/iterators.py" type="text/plain"><tt>email.iterators</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#email">email</a>
+ &#8226;   <a href="#io">io</a>
+ &#8226;   <a href="#sys">sys</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#email.message">email.message</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="email.message"></a>
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/message.py" type="text/plain"><tt>email.message</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#binascii">binascii</a>
+ &#8226;   <a href="#email">email</a>
+ &#8226;   <a href="#email._encoded_words">email._encoded_words</a>
+ &#8226;   <a href="#email._policybase">email._policybase</a>
+ &#8226;   <a href="#email.charset">email.charset</a>
+ &#8226;   <a href="#email.errors">email.errors</a>
+ &#8226;   <a href="#email.generator">email.generator</a>
+ &#8226;   <a href="#email.iterators">email.iterators</a>
+ &#8226;   <a href="#email.policy">email.policy</a>
+ &#8226;   <a href="#email.utils">email.utils</a>
+ &#8226;   <a href="#io">io</a>
+ &#8226;   <a href="#quopri">quopri</a>
+ &#8226;   <a href="#re">re</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#email.contentmanager">email.contentmanager</a>
+ &#8226;   <a href="#email.feedparser">email.feedparser</a>
+ &#8226;   <a href="#email.policy">email.policy</a>
+ &#8226;   <a href="#http.client">http.client</a>
+ &#8226;   <a href="#httpx._models">httpx._models</a>
+ &#8226;   <a href="#importlib.metadata._adapters">importlib.metadata._adapters</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="email.parser"></a>
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/parser.py" type="text/plain"><tt>email.parser</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#email">email</a>
+ &#8226;   <a href="#email._policybase">email._policybase</a>
+ &#8226;   <a href="#email.feedparser">email.feedparser</a>
+ &#8226;   <a href="#io">io</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#email">email</a>
+ &#8226;   <a href="#http.client">http.client</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="email.policy"></a>
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/policy.py" type="text/plain"><tt>email.policy</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#email">email</a>
+ &#8226;   <a href="#email._policybase">email._policybase</a>
+ &#8226;   <a href="#email.contentmanager">email.contentmanager</a>
+ &#8226;   <a href="#email.headerregistry">email.headerregistry</a>
+ &#8226;   <a href="#email.message">email.message</a>
+ &#8226;   <a href="#email.utils">email.utils</a>
+ &#8226;   <a href="#re">re</a>
+ &#8226;   <a href="#sys">sys</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#email.message">email.message</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="email.quoprimime"></a>
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/quoprimime.py" type="text/plain"><tt>email.quoprimime</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#email">email</a>
+ &#8226;   <a href="#re">re</a>
+ &#8226;   <a href="#string">string</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#email.charset">email.charset</a>
+ &#8226;   <a href="#email.contentmanager">email.contentmanager</a>
+ &#8226;   <a href="#email.header">email.header</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="email.utils"></a>
+  <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/email/utils.py" type="text/plain"><tt>email.utils</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#datetime">datetime</a>
+ &#8226;   <a href="#email">email</a>
+ &#8226;   <a href="#email._parseaddr">email._parseaddr</a>
+ &#8226;   <a href="#email.charset">email.charset</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#random">random</a>
+ &#8226;   <a href="#re">re</a>
+ &#8226;   <a href="#socket">socket</a>
+ &#8226;   <a href="#time">time</a>
+ &#8226;   <a href="#urllib.parse">urllib.parse</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#email._header_value_parser">email._header_value_parser</a>
+ &#8226;   <a href="#email._policybase">email._policybase</a>
+ &#8226;   <a href="#email.generator">email.generator</a>
+ &#8226;   <a href="#email.headerregistry">email.headerregistry</a>
+ &#8226;   <a href="#email.message">email.message</a>
+ &#8226;   <a href="#email.policy">email.policy</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
 
   </div>
@@ -16682,6 +17169,8 @@ imported by:
  &#8226;   <a href="#contextlib">contextlib</a>
  &#8226;   <a href="#dns.name">dns.name</a>
  &#8226;   <a href="#dns.quic._common">dns.quic._common</a>
+ &#8226;   <a href="#email._encoded_words">email._encoded_words</a>
+ &#8226;   <a href="#email.charset">email.charset</a>
  &#8226;   <a href="#exceptiongroup._exceptions">exceptiongroup._exceptions</a>
  &#8226;   <a href="#exceptiongroup._formatting">exceptiongroup._formatting</a>
  &#8226;   <a href="#fnmatch">fnmatch</a>
@@ -17340,8 +17829,8 @@ imported by:
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
     <a href="#'collections.abc'">'collections.abc'</a>
- &#8226;   <a href="#'email.message'">'email.message'</a>
- &#8226;   <a href="#'email.parser'">'email.parser'</a>
+ &#8226;   <a href="#email.message">email.message</a>
+ &#8226;   <a href="#email.parser">email.parser</a>
  &#8226;   <a href="#errno">errno</a>
  &#8226;   <a href="#http">http</a>
  &#8226;   <a href="#io">io</a>
@@ -18644,10 +19133,10 @@ imported by:
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
     <a href="#'collections.abc'">'collections.abc'</a>
- &#8226;   <a href="#'email.message'">'email.message'</a>
  &#8226;   <a href="#__future__">__future__</a>
  &#8226;   <a href="#codecs">codecs</a>
  &#8226;   <a href="#datetime">datetime</a>
+ &#8226;   <a href="#email.message">email.message</a>
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
  &#8226;   <a href="#httpx">httpx</a>
  &#8226;   <a href="#httpx._content">httpx._content</a>
@@ -19361,7 +19850,7 @@ imported by:
   <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/importlib/metadata/_adapters.py" type="text/plain"><tt>importlib.metadata._adapters</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#'email.message'">'email.message'</a>
+    <a href="#email.message">email.message</a>
  &#8226;   <a href="#functools">functools</a>
  &#8226;   <a href="#importlib.metadata">importlib.metadata</a>
  &#8226;   <a href="#importlib.metadata._text">importlib.metadata._text</a>
@@ -19833,6 +20322,11 @@ imported by:
  &#8226;   <a href="#dns.tokenizer">dns.tokenizer</a>
  &#8226;   <a href="#dns.zone">dns.zone</a>
  &#8226;   <a href="#dotenv.main">dotenv.main</a>
+ &#8226;   <a href="#email.feedparser">email.feedparser</a>
+ &#8226;   <a href="#email.generator">email.generator</a>
+ &#8226;   <a href="#email.iterators">email.iterators</a>
+ &#8226;   <a href="#email.message">email.message</a>
+ &#8226;   <a href="#email.parser">email.parser</a>
  &#8226;   <a href="#encodings.quopri_codec">encodings.quopri_codec</a>
  &#8226;   <a href="#encodings.uu_codec">encodings.uu_codec</a>
  &#8226;   <a href="#getpass">getpass</a>
@@ -22910,6 +23404,7 @@ imported by:
  &#8226;   <a href="#click.types">click.types</a>
  &#8226;   <a href="#collections">collections</a>
  &#8226;   <a href="#copyreg">copyreg</a>
+ &#8226;   <a href="#email._header_value_parser">email._header_value_parser</a>
  &#8226;   <a href="#fractions">fractions</a>
  &#8226;   <a href="#functools">functools</a>
  &#8226;   <a href="#gettext">gettext</a>
@@ -23033,6 +23528,7 @@ imported by:
  &#8226;   <a href="#dns.query">dns.query</a>
  &#8226;   <a href="#dns.zone">dns.zone</a>
  &#8226;   <a href="#dotenv.main">dotenv.main</a>
+ &#8226;   <a href="#email.utils">email.utils</a>
  &#8226;   <a href="#exceptiongroup">exceptiongroup</a>
  &#8226;   <a href="#fnmatch">fnmatch</a>
  &#8226;   <a href="#functools">functools</a>
@@ -23667,7 +24163,8 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#main.py">main.py</a>
+    <a href="#api_intelligence_wrapper.core.models">api_intelligence_wrapper.core.models</a>
+ &#8226;   <a href="#main.py">main.py</a>
  &#8226;   <a href="#pydantic">pydantic</a>
  &#8226;   <a href="#pydantic._internal">pydantic._internal</a>
  &#8226;   <a href="#pydantic._internal._core_utils">pydantic._internal._core_utils</a>
@@ -23727,7 +24224,8 @@ imported by:
   <a target="code" href="" type="text/plain"><tt>pydantic.BaseModel</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
-    <a href="#pydantic">pydantic</a>
+    <a href="#api_intelligence_wrapper.core.models">api_intelligence_wrapper.core.models</a>
+ &#8226;   <a href="#pydantic">pydantic</a>
  &#8226;   <a href="#pydantic._internal._core_utils">pydantic._internal._core_utils</a>
  &#8226;   <a href="#pydantic._internal._import_utils">pydantic._internal._import_utils</a>
  &#8226;   <a href="#pydantic._internal._typing_extra">pydantic._internal._typing_extra</a>
@@ -35371,7 +35869,9 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#encodings.quopri_codec">encodings.quopri_codec</a>
+    <a href="#email.encoders">email.encoders</a>
+ &#8226;   <a href="#email.message">email.message</a>
+ &#8226;   <a href="#encodings.quopri_codec">encodings.quopri_codec</a>
 
   </div>
 
@@ -35409,6 +35909,8 @@ imported by:
  &#8226;   <a href="#dns.rdtypes.util">dns.rdtypes.util</a>
  &#8226;   <a href="#dns.renderer">dns.renderer</a>
  &#8226;   <a href="#dns.resolver">dns.resolver</a>
+ &#8226;   <a href="#email.generator">email.generator</a>
+ &#8226;   <a href="#email.utils">email.utils</a>
  &#8226;   <a href="#rich.live">rich.live</a>
  &#8226;   <a href="#rich.progress">rich.progress</a>
  &#8226;   <a href="#rich.style">rich.style</a>
@@ -35474,6 +35976,16 @@ imported by:
  &#8226;   <a href="#dns.zonefile">dns.zonefile</a>
  &#8226;   <a href="#dotenv.parser">dotenv.parser</a>
  &#8226;   <a href="#dotenv.variables">dotenv.variables</a>
+ &#8226;   <a href="#email._encoded_words">email._encoded_words</a>
+ &#8226;   <a href="#email._header_value_parser">email._header_value_parser</a>
+ &#8226;   <a href="#email._policybase">email._policybase</a>
+ &#8226;   <a href="#email.feedparser">email.feedparser</a>
+ &#8226;   <a href="#email.generator">email.generator</a>
+ &#8226;   <a href="#email.header">email.header</a>
+ &#8226;   <a href="#email.message">email.message</a>
+ &#8226;   <a href="#email.policy">email.policy</a>
+ &#8226;   <a href="#email.quoprimime">email.quoprimime</a>
+ &#8226;   <a href="#email.utils">email.utils</a>
  &#8226;   <a href="#email_validator.rfc_constants">email_validator.rfc_constants</a>
  &#8226;   <a href="#email_validator.syntax">email_validator.syntax</a>
  &#8226;   <a href="#encodings.idna">encodings.idna</a>
@@ -35862,6 +36374,7 @@ imports:
  &#8226;   <a href="#rich.box">rich.box</a>
  &#8226;   <a href="#rich.console">rich.console</a>
  &#8226;   <a href="#rich.errors">rich.errors</a>
+ &#8226;   <a href="#rich.filesize">rich.filesize</a>
  &#8226;   <a href="#rich.themes">rich.themes</a>
  &#8226;   <a href="#typing">typing</a>
 
@@ -37434,6 +37947,7 @@ imports:
   <div class="import">
 imported by:
     <a href="#main.py">main.py</a>
+ &#8226;   <a href="#rich">rich</a>
  &#8226;   <a href="#rich.progress">rich.progress</a>
 
   </div>
@@ -38915,6 +39429,7 @@ imported by:
  &#8226;   <a href="#dns.quic._trio">dns.quic._trio</a>
  &#8226;   <a href="#dns.rdtypes.IN.WKS">dns.rdtypes.IN.WKS</a>
  &#8226;   <a href="#dns.resolver">dns.resolver</a>
+ &#8226;   <a href="#email.utils">email.utils</a>
  &#8226;   <a href="#ftplib">ftplib</a>
  &#8226;   <a href="#http.client">http.client</a>
  &#8226;   <a href="#httpcore._backends.sync">httpcore._backends.sync</a>
@@ -39130,6 +39645,9 @@ imports:
   <div class="import">
 imported by:
     <a href="#dns._features">dns._features</a>
+ &#8226;   <a href="#email._encoded_words">email._encoded_words</a>
+ &#8226;   <a href="#email._header_value_parser">email._header_value_parser</a>
+ &#8226;   <a href="#email.quoprimime">email.quoprimime</a>
  &#8226;   <a href="#logging">logging</a>
  &#8226;   <a href="#mdurl._encode">mdurl._encode</a>
  &#8226;   <a href="#ntpath">ntpath</a>
@@ -39408,6 +39926,10 @@ imported by:
  &#8226;   <a href="#dns.win32util">dns.win32util</a>
  &#8226;   <a href="#dns.zonefile">dns.zonefile</a>
  &#8226;   <a href="#dotenv.main">dotenv.main</a>
+ &#8226;   <a href="#email._header_value_parser">email._header_value_parser</a>
+ &#8226;   <a href="#email.generator">email.generator</a>
+ &#8226;   <a href="#email.iterators">email.iterators</a>
+ &#8226;   <a href="#email.policy">email.policy</a>
  &#8226;   <a href="#encodings">encodings</a>
  &#8226;   <a href="#encodings.rot_13">encodings.rot_13</a>
  &#8226;   <a href="#encodings.utf_16">encodings.utf_16</a>
@@ -39816,6 +40338,9 @@ imported by:
  &#8226;   <a href="#dns.rdtypes.ANY.RRSIG">dns.rdtypes.ANY.RRSIG</a>
  &#8226;   <a href="#dns.renderer">dns.renderer</a>
  &#8226;   <a href="#dns.resolver">dns.resolver</a>
+ &#8226;   <a href="#email._parseaddr">email._parseaddr</a>
+ &#8226;   <a href="#email.generator">email.generator</a>
+ &#8226;   <a href="#email.utils">email.utils</a>
  &#8226;   <a href="#gc">gc</a>
  &#8226;   <a href="#gzip">gzip</a>
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
@@ -40250,6 +40775,7 @@ imported by:
  &#8226;   <a href="#dataclasses">dataclasses</a>
  &#8226;   <a href="#difflib">difflib</a>
  &#8226;   <a href="#dis">dis</a>
+ &#8226;   <a href="#email.headerregistry">email.headerregistry</a>
  &#8226;   <a href="#enum">enum</a>
  &#8226;   <a href="#exceptiongroup._catch">exceptiongroup._catch</a>
  &#8226;   <a href="#exceptiongroup._formatting">exceptiongroup._formatting</a>
@@ -40442,6 +40968,8 @@ imported by:
  &#8226;   <a href="#anyio.streams.stapled">anyio.streams.stapled</a>
  &#8226;   <a href="#anyio.streams.tls">anyio.streams.tls</a>
  &#8226;   <a href="#anyio.to_thread">anyio.to_thread</a>
+ &#8226;   <a href="#api_intelligence_wrapper.core.models">api_intelligence_wrapper.core.models</a>
+ &#8226;   <a href="#api_intelligence_wrapper.facade">api_intelligence_wrapper.facade</a>
  &#8226;   <a href="#attr">attr</a>
  &#8226;   <a href="#attr._compat">attr._compat</a>
  &#8226;   <a href="#attr._funcs">attr._funcs</a>
@@ -41377,7 +41905,8 @@ imported by:
   <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/urllib/__init__.py" type="text/plain"><tt>urllib</tt></a>
 <span class="moduletype">Package</span>  <div class="import">
 imported by:
-    <a href="#urllib.error">urllib.error</a>
+    <a href="#email._header_value_parser">email._header_value_parser</a>
+ &#8226;   <a href="#urllib.error">urllib.error</a>
  &#8226;   <a href="#urllib.parse">urllib.parse</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
  &#8226;   <a href="#urllib.response">urllib.response</a>
@@ -41430,6 +41959,7 @@ imported by:
  &#8226;   <a href="#dns.query">dns.query</a>
  &#8226;   <a href="#dns.quic._common">dns.quic._common</a>
  &#8226;   <a href="#dns.resolver">dns.resolver</a>
+ &#8226;   <a href="#email.utils">email.utils</a>
  &#8226;   <a href="#http.client">http.client</a>
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
  &#8226;   <a href="#httpcore._models">httpcore._models</a>
@@ -41453,12 +41983,12 @@ imported by:
   <a target="code" href="///C:/Users/LENOVO/AppData/Local/Python/pythoncore-3.14-64/Lib/urllib/request.py" type="text/plain"><tt>urllib.request</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#'email.utils'">'email.utils'</a>
- &#8226;   <a href="#_scproxy">_scproxy</a>
+    <a href="#_scproxy">_scproxy</a>
  &#8226;   <a href="#base64">base64</a>
  &#8226;   <a href="#bisect">bisect</a>
  &#8226;   <a href="#contextlib">contextlib</a>
  &#8226;   <a href="#email">email</a>
+ &#8226;   <a href="#email.utils">email.utils</a>
  &#8226;   <a href="#fnmatch">fnmatch</a>
  &#8226;   <a href="#ftplib">ftplib</a>
  &#8226;   <a href="#hashlib">hashlib</a>

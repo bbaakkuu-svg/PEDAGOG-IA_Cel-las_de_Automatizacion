@@ -3,7 +3,13 @@ import socketserver
 import webbrowser
 import os
 import json
+import sys
 import threading
+
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+except AttributeError:
+    pass # In case it doesn't support reconfigure
 
 PORT = 8000
 # Resolución de directorios para PyInstaller
