@@ -12,11 +12,12 @@ binaries = []
 hiddenimports = [
     'core',
     'core.analyzer',
-    'pandas'
+    'pandas',
+    'openpyxl'
 ]
 
-# Recolectar metadatos de pandas y rich
-for lib in ['pandas', 'rich', 'numpy']:
+# Recolectar metadatos de pandas, rich, numpy y openpyxl
+for lib in ['pandas', 'rich', 'numpy', 'openpyxl']:
     tmp_ret = collect_all(lib)
     datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
 

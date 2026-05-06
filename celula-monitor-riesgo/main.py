@@ -93,14 +93,14 @@ class RiskMonitorSEA:
 
         while True:
             console.print("\n[bold white]Opciones:[/bold white]")
-            console.print(" 1. Arrastrar archivo de datos (.csv)")
+            console.print(" 1. Arrastrar archivo de datos (.csv, .xlsx)")
             console.print(" 2. Ejecutar análisis con datos de ejemplo")
             console.print(" 3. Salir")
             
             choice = Prompt.ask("\nSeleccione una opción", choices=["1", "2", "3"], default="2")
             
             if choice == "1":
-                path = Prompt.ask("Arrastre el CSV aquí y presione Enter").strip('"').strip("'")
+                path = Prompt.ask("Arrastre el archivo (CSV/Excel) aquí y presione Enter").strip('"').strip("'")
                 if os.path.exists(path):
                     self.process_data(path)
                 else:
