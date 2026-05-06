@@ -4,3 +4,4 @@ rich
 gh-cli
 pymupdf
 openpyxl
+pandas
