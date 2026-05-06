@@ -25,7 +25,7 @@ for lib in ['rich', 'pydantic']:
 # Lista de exclusiones para reducir peso drásticamente
 excluded_modules = [
     'tkinter', 'matplotlib', 'numpy', 'pandas', 'scipy', 
-    'unittest', 'pydoc', 'email',
+    'unittest', 'pydoc',
     'distutils', 'setuptools', 'lib2to3'
 ]
 
@@ -33,7 +33,7 @@ block_cipher = None
 
 a = Analysis(
     [os.path.join(cell_path, 'main.py')],
-    pathex=[project_root, cell_path],
+    pathex=[project_root, cell_path, os.path.join(project_root, 'api_intelligence_wrapper')],
     binaries=binaries,
     datas=datas,
     hiddenimports=hiddenimports,

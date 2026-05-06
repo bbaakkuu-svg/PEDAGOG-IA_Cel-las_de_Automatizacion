@@ -111,9 +111,10 @@ Este documento consolida todos los "Master Prompts" desarrollados durante la cre
 > "Contexto: Al hacer doble clic sobre el `.exe` recién compilado, la ventana se cierra de golpe.
 > Tarea:
 > 1. Ejecución Diagnóstica: Ejecuta el binario desde una terminal (PowerShell/cmd) para capturar el Traceback.
-> 2. Identificación: Busca `ModuleNotFoundError`. Si falta una librería base (ej: `html`), es porque una dependencia visual (`rich`) la necesita.
-> 3. Corrección: Modifica el archivo `.spec` para retirar el módulo faltante de la lista `excluded_modules`.
-> 4. Recompilación: Vuelve a ejecutar PyInstaller limpiando la caché (`--clean`).
+> 2. Identificación de Dependencias Ocultas: Busca `ModuleNotFoundError`. Si falta una librería base (ej: `email`, `html`), es porque una dependencia visual (`rich`) la necesita internamente.
+> 3. Identificación de Rutas (Paths): Si el error indica que no encuentra un módulo propio (ej: `api_intelligence_wrapper`), significa que PyInstaller no reconoce la ruta raíz del paquete.
+> 4. Corrección: Modifica el archivo `.spec`. Retira el módulo faltante de `excluded_modules` o añade la ruta correcta a `pathex=[project_root, os.path.join(project_root, 'mi_paquete')]`.
+> 5. Recompilación: Vuelve a ejecutar PyInstaller limpiando la caché (`--clean`).
 > Output: El log de error descubierto, el `.spec` corregido y el binario funcional."
 
 ---

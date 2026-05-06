@@ -28,4 +28,3 @@ missing module named pwd - imported by posixpath (delayed, conditional, optional
 missing module named _frozen_importlib_external - imported by importlib._bootstrap (delayed), importlib (optional), importlib.abc (optional)
 excluded module named _frozen_importlib - imported by importlib (optional), importlib.abc (optional)
 missing module named _posixsubprocess - imported by subprocess (conditional)
-excluded module named html - imported by http.server (top-level)

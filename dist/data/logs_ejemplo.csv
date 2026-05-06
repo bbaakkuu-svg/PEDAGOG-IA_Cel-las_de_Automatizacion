@@ -1,0 +1,4 @@
+student_id,last_login_days,submission_rate,avg_grade,forum_posts
+ALUM001,10,0.4,4.5,1
+ALUM002,2,0.9,8.5,5
+ALUM003,8,0.6,5.5,0
