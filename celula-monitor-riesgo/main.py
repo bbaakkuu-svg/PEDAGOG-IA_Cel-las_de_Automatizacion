@@ -1,8 +1,25 @@
-# main.py - Monitor de Alumnos en Riesgo (EWS) - SLIM VERSION
-# -------------------------------------------------------------------------
 import os
 import sys
 import time
+from pathlib import Path
+
+# Forzar codificación UTF-8 en Windows para evitar errores con emojis y caracteres especiales
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
+
+# Resolución de rutas para acceder al núcleo compartido
+root_path = Path(__file__).parent.parent
+if str(root_path) not in sys.path:
+    sys.path.insert(0, str(root_path))
+
+try:
+    from pedagogia_shared import Config
+except ImportError:
+    Config = None
 
 # Manejo de dependencias con reporte amigable
 try:
@@ -31,14 +48,17 @@ console = Console()
 
 class RiskMonitorSEA:
     def __init__(self):
-        self.default_data = os.path.join("data", "logs_ejemplo.csv")
+        self.base_path = Path(__file__).parent
+        self.default_data = self.base_path / "data" / "logs_ejemplo.csv"
         self._ensure_data_exists()
 
     def _ensure_data_exists(self):
         """Crea un archivo de ejemplo si no existe usando csv nativo."""
-        if not os.path.exists("data"):
-            os.makedirs("data")
-        if not os.path.exists(self.default_data):
+        data_dir = self.base_path / "data"
+        if not data_dir.exists():
+            data_dir.mkdir(parents=True, exist_ok=True)
+        
+        if not self.default_data.exists():
             import csv
             data = [
                 ["student_id", "last_login_days", "submission_rate", "avg_grade", "forum_posts"],
@@ -87,6 +107,9 @@ class RiskMonitorSEA:
             "[dim]Early Warning System v1.1 | Antigravity 2026[/dim]",
             border_style="yellow"
         ))
+
+        if Config and Config.DEBUG:
+            console.print(f"[dim]Modo Debug: Configuración centralizada cargada de {Config.PROJECT_ROOT}[/dim]")
 
         while True:
             console.print("\n[bold white]Opciones:[/bold white]")

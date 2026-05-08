@@ -1,0 +1,18 @@
+{
+    "Auditor": {
+        "success": 15,
+        "errors": []
+    },
+    "Generador": {
+        "success": 15,
+        "errors": []
+    },
+    "Monitor": {
+        "success": 15,
+        "errors": []
+    },
+    "Dashboard": {
+        "success": 1,
+        "errors": []
+    }
+}

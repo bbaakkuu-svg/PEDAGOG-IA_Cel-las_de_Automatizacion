@@ -4,6 +4,25 @@ import os
 import sys
 import json
 import time
+from pathlib import Path
+
+# Forzar codificación UTF-8 en Windows para evitar errores con emojis y caracteres especiales
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
+
+# Resolución de rutas para acceder al núcleo compartido
+root_path = Path(__file__).parent.parent
+if str(root_path) not in sys.path:
+    sys.path.insert(0, str(root_path))
+
+try:
+    from pedagogia_shared import Config
+except ImportError:
+    Config = None
 
 # Manejo de dependencias con reporte amigable
 try:
@@ -39,7 +58,12 @@ class MaterialGeneratorSEA:
 
     def _initialize_engine(self):
         try:
-            self.engine = ContentEngine()
+            # Usar configuración centralizada
+            api_token = Config.PEDAGOGIA_API_TOKEN if Config else "DEV_TOKEN_UNSET"
+            self.engine = ContentEngine(api_token=api_token)
+            
+            if Config and Config.DEBUG:
+                console.print("[dim]Modo Debug activo: Configuración cargada desde .env[/dim]")
         except Exception as e:
             console.print(f"[bold red]✘ Error al inicializar el motor de IA:[/bold red] {e}")
 

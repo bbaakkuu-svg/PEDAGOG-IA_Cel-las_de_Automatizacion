@@ -1,0 +1,32 @@
+{
+    "student_name": "Ana Rodriguez",
+    "course": "M\u00e1ster en Automatizaci\u00f3n Industrial",
+    "competencies": [
+        {
+            "name": "Pensamiento Computacional",
+            "value": 90,
+            "average": 70
+        },
+        {
+            "name": "Arquitectura Limpia",
+            "value": 85,
+            "average": 65
+        },
+        {
+            "name": "Resoluci\u00f3n de Problemas",
+            "value": 95,
+            "average": 75
+        },
+        {
+            "name": "Integraci\u00f3n de IA",
+            "value": 88,
+            "average": 60
+        },
+        {
+            "name": "Trabajo en Equipo",
+            "value": 75,
+            "average": 80
+        }
+    ],
+    "ai_insight": "Ana muestra un dominio excepcional en habilidades t\u00e9cnicas (Arquitectura e IA). Se sugiere fomentar el liderazgo en proyectos colaborativos."
+}

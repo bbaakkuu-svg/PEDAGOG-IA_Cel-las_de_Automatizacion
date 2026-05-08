@@ -11,6 +11,17 @@ try:
 except AttributeError:
     pass # In case it doesn't support reconfigure
 
+# Resolución de rutas para acceder al núcleo compartido
+from pathlib import Path
+root_path = Path(__file__).parent.parent
+if str(root_path) not in sys.path:
+    sys.path.insert(0, str(root_path))
+
+try:
+    from pedagogia_shared import Config
+except ImportError:
+    Config = None
+
 PORT = 8000
 # Resolución de directorios para PyInstaller
 if getattr(sys, 'frozen', False):

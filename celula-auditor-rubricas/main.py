@@ -5,50 +5,38 @@ import os
 import time
 import json
 
-# Forzar codificación UTF-8 en Windows para evitar errores con emojis
+# Forzar codificación UTF-8 en Windows para evitar errores con emojis y caracteres especiales
 if sys.platform == "win32":
     try:
-        import io
-        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-        sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
     except Exception:
         pass
+
+# Resolución de rutas para acceder al núcleo compartido
+from pathlib import Path
+root_path = Path(__file__).parent.parent
+if str(root_path) not in sys.path:
+    sys.path.insert(0, str(root_path))
+
+try:
+    from pedagogia_shared import Config
+    from pedagogia_shared.adapters.pdf_adapter import PDFAdapter
+    from pedagogia_shared.adapters.excel_adapter import ExcelExporter
+except ImportError:
+    Config = None
+    PDFAdapter = None
+    ExcelExporter = None
+
+# Manejo de dependencias (se mantiene para compatibilidad con librerías externas)
+PDF_SUPPORT = True if PDFAdapter else False
+EXCEL_SUPPORT = True if ExcelExporter else False
 
 from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
 from rich.progress import Progress, SpinnerColumn, TextColumn
 from rich.markdown import Markdown
-
-# Gestión de dependencias con reporte de errores
-PDF_SUPPORT = False
-EXCEL_SUPPORT = False
-
-try:
-    if getattr(sys, 'frozen', False):
-        bundle_dir = sys._MEIPASS
-        if bundle_dir not in sys.path:
-            sys.path.insert(0, bundle_dir)
-    
-    root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    if root_path not in sys.path:
-        sys.path.insert(0, root_path)
-    
-    try:
-        from adapters.pdf_adapter import PDFAdapter
-        from core.exporter import ExcelExporter
-    except ImportError:
-        from celula_auditor_rubricas.adapters.pdf_adapter import PDFAdapter
-        from celula_auditor_rubricas.core.exporter import ExcelExporter
-    
-    PDF_SUPPORT = True
-    EXCEL_SUPPORT = True
-except ImportError as ie:
-    # Identificar qué librería falta para informar al usuario
-    missing_lib = str(ie).split("'")[-2] if "'" in str(ie) else str(ie)
-    console.print(f"[dim]Nota: No se pudo cargar la librería '{missing_lib}'.[/dim]")
-except Exception as e:
-    console.print(f"[dim]Error inesperado en carga de módulos: {str(e)}[/dim]")
 
 console = Console()
 
@@ -86,17 +74,62 @@ class RubricAuditorSEA:
 3. Los resultados se guardan automáticamente en Excel.
         """
         console.print(Panel(Markdown(header), border_style="cyan"))
+        
+        if Config and Config.DEBUG:
+            console.print(f"[dim]Configuración activa desde .env (Raíz: {Config.PROJECT_ROOT})[/dim]")
 
-    def process_input(self, file_path):
-        if not file_path or not os.path.exists(file_path):
+    def process_input(self, path):
+        if not path or not os.path.exists(path):
             self._evaluate_demo()
             return
 
-        filename = os.path.basename(file_path).lower()
-        if "rubrica" in filename or "criterios" in filename:
-            self._ingest_rubric(file_path)
+        if os.path.isdir(path):
+            self._evaluate_batch(path)
+        elif path.lower().endswith((".txt", ".json", ".pdf")):
+            filename = os.path.basename(path).lower()
+            if "rubrica" in filename or "criterios" in filename:
+                self._ingest_rubric(path)
+            else:
+                self._evaluate_work(path)
         else:
-            self._evaluate_work(file_path)
+            console.print("[bold yellow]⚠️ Formato no soportado (use .pdf, .txt o .json).[/bold yellow]")
+
+    def _evaluate_batch(self, directory_path):
+        """Procesa masivamente todos los archivos válidos en un directorio."""
+        valid_extensions = (".pdf", ".txt", ".json")
+        files = [os.path.join(directory_path, f) for f in os.listdir(directory_path) if f.lower().endswith(valid_extensions)]
+        
+        if not files:
+            console.print("[bold yellow]⚠️ No se encontraron archivos evaluables en el directorio.[/bold yellow]")
+            return
+
+        if not os.path.exists(self.config_path):
+            console.print("[bold red]✘ Error: Configure una rúbrica antes de iniciar el procesamiento por lotes.[/bold red]")
+            return
+
+        console.print(Panel(f"[bold cyan]🚀 Iniciando Modo Batch:[/bold cyan] {len(files)} archivos encontrados.", border_style="blue"))
+        
+        success_count = 0
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            transient=False
+        ) as progress:
+            batch_task = progress.add_task(f"[bold cyan]Procesando lote...", total=len(files))
+            
+            for file_path in files:
+                progress.update(batch_task, description=f"[blue]Evaluando: {os.path.basename(file_path)}[/blue]")
+                try:
+                    success = self._evaluate_work(file_path, quiet=True)
+                    if success:
+                        success_count += 1
+                except Exception as e:
+                    console.print(f"[red]✘ Error procesando {os.path.basename(file_path)}: {e}[/red]")
+                
+                progress.advance(batch_task)
+        
+        console.print(f"\n[bold green]✅ Proceso por lotes finalizado.[/bold green] ({success_count}/{len(files)} exitosos)")
+        console.print(f"[dim]Los resultados se han consolidado en: {self.excel_path}[/dim]\n")
 
     def _ingest_rubric(self, path):
         try:
@@ -107,8 +140,10 @@ class RubricAuditorSEA:
                 if not self.pdf_adapter:
                     raise RuntimeError("Soporte para PDF no disponible. Instale 'pymupdf'.")
                 text = self.pdf_adapter.extract_text(path)
-            else:
+            try:
                 text = open(path, 'r', encoding='utf-8').read()
+            except UnicodeDecodeError:
+                text = open(path, 'r', encoding='latin-1').read()
             
             rubric_data = {
                 "source": os.path.basename(path),
@@ -129,7 +164,7 @@ class RubricAuditorSEA:
             return [lines[i][:50] for i in range(min(5, len(lines)))]
         return ["Calidad Técnica", "Documentación", "Arquitectura", "Innovación"]
 
-    def _evaluate_work(self, path):
+    def _evaluate_work(self, path, quiet=False):
         if not os.path.exists(self.config_path):
             console.print("[bold yellow]⚠️ No hay una rúbrica activa.[/bold yellow]")
             return
@@ -147,7 +182,11 @@ class RubricAuditorSEA:
                         raise RuntimeError("Soporte para PDF no disponible. Instale 'pymupdf'.")
                     work_text = self.pdf_adapter.extract_text(path)
                 else:
-                    work_text = open(path, 'r', encoding='utf-8').read()
+                    try:
+                        work_text = open(path, 'r', encoding='utf-8').read()
+                    except UnicodeDecodeError:
+                        work_text = open(path, 'r', encoding='latin-1').read()
+                
                 time.sleep(2)
                 
                 results = self._perform_comparative_analysis(work_text, rubric)
@@ -155,12 +194,25 @@ class RubricAuditorSEA:
                 # Exportar a Excel automáticamente
                 if self.exporter:
                     summary = ", ".join([f"{d['criterio']} ({d['puntos']})" for d in results['detalles']])
-                    self.exporter.add_evaluation(os.path.basename(path), rubric['source'], results['nota'], summary)
+                    estado = "Sobresaliente" if results['nota'] >= 9 else "Notable" if results['nota'] >= 7 else "Aprobado" if results['nota'] >= 5 else "Insuficiente"
+                    self.exporter.add_row(
+                        entity_id=os.path.splitext(os.path.basename(path))[0],
+                        source_file=os.path.basename(path),
+                        process_type=f"Auditoria ({rubric['source']})",
+                        value=results['nota'],
+                        status_level=estado,
+                        details=summary
+                    )
                 
-                self._display_detailed_report(results, os.path.basename(path), rubric['source'])
-        
+                # Reporte en consola si no es modo batch (quiet)
+                if not quiet:
+                    self._display_detailed_report(results, os.path.basename(path), rubric['source'])
+                
+                return True
         except Exception as e:
-            console.print(f"[bold red]Error en la evaluación:[/bold red] {str(e)}")
+            if not quiet:
+                console.print(f"[bold red]Error en la evaluación:[/bold red] {str(e)}")
+            return False
 
     def _perform_comparative_analysis(self, work_text, rubric):
         work_lower = work_text.lower()

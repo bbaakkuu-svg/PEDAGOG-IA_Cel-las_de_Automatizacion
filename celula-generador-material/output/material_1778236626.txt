@@ -1,0 +1,21 @@
+RESUMEN EJECUTIVO:
+El contenido trata sobre La IA en la educación permite personalizar el apre... 
+
+Puntos Clave:
+1. Automatizacion Modular.
+2. Integracion con IA.
+
+==================================================
+📝 CUESTIONARIO:
+
+1. ¿Cual es el objetivo principal de la Célula Pedagog-ia?
+   - Automatizacion
+   - Docencia
+   - Investigacion
+   - Todas las anteriores
+
+2. ¿Que framework utiliza el Scaffolder?
+   - Django
+   - Kenneth Reitz
+   - Flask
+   - FastAPI

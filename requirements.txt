@@ -5,3 +5,4 @@ gh-cli
 pymupdf
 openpyxl
 pandas
+python-dotenv

@@ -1,11 +1,11 @@
 # engine.py - Motor de transformacion de contenidos
 # -------------------------------------------------------------------------
-from api_intelligence_wrapper.facade import PedagogiaIntelligenceFacade
+from pedagogia_shared.intelligence.facade import PedagogiaIntelligenceFacade
 import json
 
 class ContentEngine:
-    def __init__(self):
-        self.ai = PedagogiaIntelligenceFacade(api_token="DEV_TOKEN")
+    def __init__(self, api_token: str = "DEV_TOKEN"):
+        self.ai = PedagogiaIntelligenceFacade(api_token=api_token)
 
     def generate_quiz(self, content_text: str):
         """
