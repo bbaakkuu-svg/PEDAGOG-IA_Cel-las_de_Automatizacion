@@ -7,6 +7,7 @@ Este documento consolida todos los "Master Prompts" desarrollados durante la cre
 1. [Fase 1: Arquitectura y Diseño de Software](#fase-1-arquitectura-y-diseño-de-software)
    - 1.1. [Diseño de Células de Automatización (Industrialización)](#11-diseño-de-células-de-automatización-industrialización)
    - 1.2. [Interoperabilidad y Pipeline de Datos](#12-interoperabilidad-y-pipeline-de-datos)
+   - 1.3. [Refactorización Arquitectural Orientada a Dominios](#13-refactorización-arquitectural-orientada-a-dominios)
 2. [Fase 2: Desarrollo y Refactorización](#fase-2-desarrollo-y-refactorización)
    - 2.1. [Rebranding y Sustitución Semántica](#21-rebranding-y-sustitución-semántica)
    - 2.2. [Ingeniería de Prompts para Evaluadores IA (Pedagogía)](#22-ingeniería-de-prompts-para-evaluadores-ia-pedagogía)
@@ -17,6 +18,7 @@ Este documento consolida todos los "Master Prompts" desarrollados durante la cre
    - 4.1. [Sincronización y Workflow de GitHub](#41-sincronización-y-workflow-de-github)
    - 4.2. [Estrategia "Slim Build" (Optimización de Tamaño)](#42-estrategia-slim-build-optimización-de-tamaño)
    - 4.3. [Empaquetado de Células Híbridas (Web/Backend)](#43-empaquetado-de-células-híbridas-webbackend)
+   - 4.4. [Optimización de Gestión de Ciclo de Vida (SDLC)](#44-optimización-de-gestión-de-ciclo-de-vida-sdlc)
 5. [Fase 5: Gestión de Conocimiento y Gobernanza](#fase-5-gestión-de-conocimiento-y-gobernanza)
    - 5.1. [Actualización Continua de la Librería (Auto-updater)](#51-actualización-continua-de-la-librería-auto-updater)
 
@@ -48,6 +50,19 @@ Este documento consolida todos los "Master Prompts" desarrollados durante la cre
 > 2. Refactorización del Emisor: Actualiza la exportación para que cumpla el contrato.
 > 3. Refactorización del Receptor: Aplica 'Graceful Degradation' (tolerancia a fallos); si faltan columnas adicionales, que asigne pesos dinámicos y no rompa la ejecución.
 > Output: Scripts emisores y receptores actualizados y diagrama de flujo de datos."
+
+### 1.3. Refactorización Arquitectural Orientada a Dominios
+**Objetivo:** Evolucionar un ecosistema disperso hacia una estructura modular industrial.
+**Casos de Uso:** Reestructuración profunda de repositorios para mejorar la mantenibilidad.
+
+> **Instrucción Core:**
+> "Contexto: Estamos ejecutando una refactorización integral hacia una Arquitectura Modular de Grado Industrial.
+> Tarea: Reubica y unifica los componentes del sistema siguiendo estos dominios:
+> 1.  **Núcleo Unificado (`/core`)**: Fusiona toda la lógica compartida (adapters, IA, config, logger, cache) en un solo paquete central.
+> 2.  **Agrupación de Células (`/cells`)**: Migra las aplicaciones funcionales a directorios de dominio específicos (ej: `cells/auditor`).
+> 3.  **Segregación de Infraestructura (`/infra`)**: Aísla herramientas de soporte, orquestación y scripts de DevOps.
+> 4.  **Normalización de Rutas**: Implementa resolución de rutas dinámica (basada en `pathlib`) para asegurar la portabilidad post-migración.
+> Output: Estructura de archivos reubicada y puntos de entrada (`main.py`) con importaciones actualizadas."
 
 ---
 
@@ -157,6 +172,19 @@ Este documento consolida todos los "Master Prompts" desarrollados durante la cre
 > 3. Compilar manteniendo el modo consola activo para ver los logs del servidor.
 > Output: Archivo `.spec` ajustado, `main.py` con resolución dinámica de paths y el ejecutable funcional."
 
+### 4.4. Optimización de Gestión de Ciclo de Vida (SDLC)
+**Objetivo:** Automatizar el flujo de desarrollo desde la creación de la tarea hasta el despliegue.
+**Casos de Uso:** Gestión profesional de hitos de desarrollo utilizando el framework WorkFlow.
+
+> **Instrucción Core:**
+> "Contexto: Eres un DevOps Engineer Senior. Utiliza el framework `/infra/WorkFlow` para gestionar el ciclo de vida del software (SDLC).
+> Tarea: Para cada nuevo requerimiento técnico:
+> 1.  **Analiza** el impacto arquitectural en los dominios `/core` y `/cells`.
+> 2.  **Formaliza** la tarea mediante la creación de GitHub Issues con etiquetas de prioridad.
+> 3.  **Aísla** el desarrollo creando ramas de trabajo (`feature/`, `bugfix/`) vinculadas al ID del issue.
+> 4.  **Sincroniza** proactivamente el estado del repositorio local con el Tablero Maestro del Proyecto.
+> Output: Confirmación de Issues creados, ramas activadas y tablero sincronizado."
+
 ---
 
 ## Fase 5: Gestión de Conocimiento y Gobernanza
@@ -172,3 +200,42 @@ Este documento consolida todos los "Master Prompts" desarrollados durante la cre
 > 2. Inserción Continua: Añádelo al archivo Markdown bajo la fase correcta (o crea una nueva).
 > 3. Commit Inmediato: Usa las herramientas de git para guardar los cambios en el repositorio.
 > Output: Un documento siempre actualizado sin que el usuario deba pedirlo explícitamente."
+
+## Fase 6: Estabilización Avanzada y Ops
+
+### 6.1. Implementación de Logging Industrial
+**Objetivo:** Establecer una trazabilidad completa de errores y eventos.
+
+> **Instrucción Core:**
+> "Contexto: Necesitamos añadir trazabilidad a la célula [NOMBRE_CELULA].
+> Tarea: Implementa un sistema de logging persistente.
+> 1. Usa `shared_core.logger` para instanciar un logger con rotación de archivos.
+> 2. Asegura que los errores críticos se capturen con el StackTrace completo.
+> 3. Los logs deben guardarse en la carpeta `/logs` de la raíz del proyecto.
+> Output: Código actualizado con decoradores de logging o llamadas explícitas en puntos críticos."
+
+### 6.2. Configuración de CI/CD para Binarios
+**Objetivo:** Automatizar la creación de entregables (.exe) en cada hito.
+
+> **Instrucción Core:**
+> "Contexto: Queremos automatizar el despliegue del ecosistema.
+> Tarea: Crea un archivo de workflow de GitHub Actions (`.github/workflows/build_releases.yml`).
+> 1. Define disparadores para 'Tags' (ej: v*).
+> 2. Configura un runner de Windows.
+> 3. Instala dependencias y ejecuta PyInstaller.
+> 4. Usa la acción `softprops/action-gh-release` para subir los binarios generados.
+> Output: El archivo YAML del workflow listo para commit."
+
+### 6.3. Capa de Caching Pedagógica (Performance Optimization)
+**Objetivo:** Evitar el re-procesamiento costoso de archivos o llamadas a IA idénticas.
+
+> **Instrucción Core:**
+> "Contexto: Las células están consumiendo demasiados recursos al re-evaluar los mismos datos.
+> Tarea: Implementa una capa de persistencia temporal (caché).
+> 1. Usa `shared_core.cache` para almacenar resultados basados en el hash del input.
+> 2. Define un TTL (Time-To-Live) para que los datos no queden obsoletos.
+> 3. Integra la lógica de 'Bypass' en la función de análisis principal: si el hash existe, devuelve el valor cacheado; si no, procesa y guarda.
+> Output: Módulo de caché y refactorización del motor de análisis."
+
+---
+*Mantenido por Antigravity | Ecosistema PEDAGOG-IA 2026*

@@ -1,0 +1,32 @@
+{
+    "timestamp": "2026-05-08T16:27:23.222142",
+    "content": {
+        "nota": 4.5,
+        "detalles": [
+            {
+                "criterio": "Calidad T\u00e9cnica",
+                "puntos": 6,
+                "evidencia": "Cumplimiento detectado (t\u00e9cnica).",
+                "feedback": "Nivel de cumplimiento satisfactorio."
+            },
+            {
+                "criterio": "Documentaci\u00f3n",
+                "puntos": 4,
+                "evidencia": "No se hallaron evidencias espec\u00edficas.",
+                "feedback": "Se recomienda incluir m\u00e1s referencias t\u00e9cnicas."
+            },
+            {
+                "criterio": "Arquitectura",
+                "puntos": 4,
+                "evidencia": "No se hallaron evidencias espec\u00edficas.",
+                "feedback": "Se recomienda incluir m\u00e1s referencias t\u00e9cnicas."
+            },
+            {
+                "criterio": "Innovaci\u00f3n",
+                "puntos": 4,
+                "evidencia": "No se hallaron evidencias espec\u00edficas.",
+                "feedback": "Se recomienda incluir m\u00e1s referencias t\u00e9cnicas."
+            }
+        ]
+    }
+}
