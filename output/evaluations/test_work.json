@@ -1,0 +1,38 @@
+{
+    "student_id": "test_work",
+    "source_file": "test_work.txt",
+    "nota": 4.4,
+    "detalles": [
+        {
+            "criterio": "Criterios de Evaluación:",
+            "puntos": 4,
+            "evidencia": "No se hallaron evidencias específicas.",
+            "feedback": "Se recomienda incluir más referencias técnicas."
+        },
+        {
+            "criterio": "1. Claridad en la redacción y ortografía.",
+            "puntos": 4,
+            "evidencia": "No se hallaron evidencias específicas.",
+            "feedback": "Se recomienda incluir más referencias técnicas."
+        },
+        {
+            "criterio": "2. Profundidad del análisis técnico.",
+            "puntos": 4,
+            "evidencia": "No se hallaron evidencias específicas.",
+            "feedback": "Se recomienda incluir más referencias técnicas."
+        },
+        {
+            "criterio": "3. Calidad de las conclusiones pedagógicas.",
+            "puntos": 6,
+            "evidencia": "Cumplimiento detectado (calidad).",
+            "feedback": "Nivel de cumplimiento satisfactorio."
+        },
+        {
+            "criterio": "4. Uso correcto de bibliografía.",
+            "puntos": 4,
+            "evidencia": "No se hallaron evidencias específicas.",
+            "feedback": "Se recomienda incluir más referencias técnicas."
+        }
+    ],
+    "timestamp": "2026-05-08 21:58:50"
+}

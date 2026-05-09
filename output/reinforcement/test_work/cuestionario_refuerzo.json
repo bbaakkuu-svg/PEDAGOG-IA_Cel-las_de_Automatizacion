@@ -1,0 +1,22 @@
+[
+    {
+        "question": "¿Cual es el objetivo principal de la Célula Pedagog-ia?",
+        "options": [
+            "Automatizacion",
+            "Docencia",
+            "Investigacion",
+            "Todas las anteriores"
+        ],
+        "answer": "Todas las anteriores"
+    },
+    {
+        "question": "¿Que framework utiliza el Scaffolder?",
+        "options": [
+            "Django",
+            "Kenneth Reitz",
+            "Flask",
+            "FastAPI"
+        ],
+        "answer": "Kenneth Reitz"
+    }
+]

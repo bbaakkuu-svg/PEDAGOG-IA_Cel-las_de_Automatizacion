@@ -1,10 +1,11 @@
 {
-    "source": "rubrica_simple.txt",
-    "timestamp": "2026-05-08 12:57:50",
+    "source": "rubrica_test.txt",
+    "timestamp": "2026-05-08 21:32:06",
     "criteria": [
-        "Calidad T\u00e9cnica",
-        "Documentaci\u00f3n",
-        "Arquitectura",
-        "Innovaci\u00f3n"
+        "Criterios de Evaluaci\u00f3n:",
+        "1. Claridad en la redacci\u00f3n y ortograf\u00eda.",
+        "2. Profundidad del an\u00e1lisis t\u00e9cnico.",
+        "3. Calidad de las conclusiones pedag\u00f3gicas.",
+        "4. Uso correcto de bibliograf\u00eda."
     ]
 }

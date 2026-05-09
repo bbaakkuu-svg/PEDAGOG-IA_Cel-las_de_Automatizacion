@@ -1,6 +1,6 @@
 # engine.py - Motor de transformacion de contenidos
 # -------------------------------------------------------------------------
-from pedagogia_shared.intelligence.facade import PedagogiaIntelligenceFacade
+from core.intelligence.facade import PedagogiaIntelligenceFacade
 import json
 
 class ContentEngine:

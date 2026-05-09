@@ -1,0 +1,38 @@
+{
+    "timestamp": "2026-05-08T21:47:47.899708",
+    "content": {
+        "nota": 4.4,
+        "detalles": [
+            {
+                "criterio": "Criterios de Evaluaci\u00f3n:",
+                "puntos": 4,
+                "evidencia": "No se hallaron evidencias espec\u00edficas.",
+                "feedback": "Se recomienda incluir m\u00e1s referencias t\u00e9cnicas."
+            },
+            {
+                "criterio": "1. Claridad en la redacci\u00f3n y ortograf\u00eda.",
+                "puntos": 4,
+                "evidencia": "No se hallaron evidencias espec\u00edficas.",
+                "feedback": "Se recomienda incluir m\u00e1s referencias t\u00e9cnicas."
+            },
+            {
+                "criterio": "2. Profundidad del an\u00e1lisis t\u00e9cnico.",
+                "puntos": 4,
+                "evidencia": "No se hallaron evidencias espec\u00edficas.",
+                "feedback": "Se recomienda incluir m\u00e1s referencias t\u00e9cnicas."
+            },
+            {
+                "criterio": "3. Calidad de las conclusiones pedag\u00f3gicas.",
+                "puntos": 6,
+                "evidencia": "Cumplimiento detectado (calidad).",
+                "feedback": "Nivel de cumplimiento satisfactorio."
+            },
+            {
+                "criterio": "4. Uso correcto de bibliograf\u00eda.",
+                "puntos": 4,
+                "evidencia": "No se hallaron evidencias espec\u00edficas.",
+                "feedback": "Se recomienda incluir m\u00e1s referencias t\u00e9cnicas."
+            }
+        ]
+    }
+}

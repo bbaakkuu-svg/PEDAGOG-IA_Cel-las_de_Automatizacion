@@ -1,0 +1,35 @@
+{
+    "student_id": "test_work",
+    "topics": [
+        "Criterios de Evaluaci\u00f3n:",
+        "1. Claridad en la redacci\u00f3n y ortograf\u00eda.",
+        "2. Profundidad del an\u00e1lisis t\u00e9cnico.",
+        "4. Uso correcto de bibliograf\u00eda."
+    ],
+    "timestamp": 1778270303.7474923,
+    "material": {
+        "summary": "RESUMEN EJECUTIVO:\nEl contenido trata sobre Temas de refuerzo pedag\u00f3gico: Criterios de Evaluac... \n\nPuntos Clave:\n1. Automatizacion Modular.\n2. Integracion con IA.",
+        "quiz": [
+            {
+                "question": "\u00bfCual es el objetivo principal de la C\u00e9lula Pedagog-ia?",
+                "options": [
+                    "Automatizacion",
+                    "Docencia",
+                    "Investigacion",
+                    "Todas las anteriores"
+                ],
+                "answer": "Todas las anteriores"
+            },
+            {
+                "question": "\u00bfQue framework utiliza el Scaffolder?",
+                "options": [
+                    "Django",
+                    "Kenneth Reitz",
+                    "Flask",
+                    "FastAPI"
+                ],
+                "answer": "Kenneth Reitz"
+            }
+        ]
+    }
+}

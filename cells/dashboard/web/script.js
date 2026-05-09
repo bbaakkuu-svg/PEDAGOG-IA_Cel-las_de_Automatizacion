@@ -1,176 +1,92 @@
-document.addEventListener('DOMContentLoaded', () => {
-    fetchData();
-    
-    document.getElementById('export-btn').addEventListener('click', exportToPDF);
-});
-
-function exportToPDF() {
-    const element = document.querySelector('.container');
-    const opt = {
-        margin:       0.5,
-        filename:     'Reporte_PedagogIA.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, backgroundColor: '#0f172a' },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
-    };
-
-    // Estilo temporal para la exportación para asegurar que todo se vea bien
-    const btn = document.getElementById('export-btn');
-    const syncBtn = btn.nextElementSibling;
-    btn.style.display = 'none';
-    syncBtn.style.display = 'none';
-
-    html2pdf().set(opt).from(element).save().then(() => {
-        btn.style.display = 'block';
-        syncBtn.style.display = 'block';
-    });
-}
-
 async function fetchData() {
     try {
         const response = await fetch('/api/data');
         const data = await response.json();
-        
-        if (data.error) {
-            console.error(data.error);
-            showError(data.error);
-            return;
-        }
-
-        updateStats(data.stats);
-        renderCompetencyChart(data.competencies);
-        updateRiskList(data.at_risk);
-        generateInsights(data);
-        
-        document.getElementById('last-update').innerText = `Última actualización: ${data.last_update}`;
-        
+        updateUI(data);
     } catch (error) {
         console.error('Error fetching data:', error);
     }
 }
 
-function updateStats(stats) {
-    animateValue('total-evals', 0, stats.total_evaluaciones, 1000);
-    animateValue('avg-grade', 0, stats.nota_promedio, 1000, true);
-    document.getElementById('pass-rate').innerText = `${stats.tasa_aprobacion}%`;
-    animateValue('risk-count', 0, stats.alerta_riesgo, 1000);
-}
+function updateUI(data) {
+    // Stats
+    document.getElementById('total-evaluations').textContent = data.stats.total_evaluaciones;
+    document.getElementById('active-reinforcements').textContent = data.stats.total_reforzamientos;
+    document.getElementById('total-cost').textContent = `$${data.stats.costo_total_usd.toFixed(4)}`;
+    document.getElementById('avg-latency').textContent = `${data.stats.latencia_media_ms}ms`;
+    document.getElementById('last-update').textContent = data.last_update;
 
-function renderCompetencyChart(competencies) {
-    const ctx = document.getElementById('competencyChart').getContext('2d');
-    
-    // Si no hay datos, mostrar placeholder
-    if (!competencies || competencies.length === 0) {
-        return;
-    }
-
-    const labels = competencies.map(c => c.name);
-    const values = competencies.map(c => c.value);
-
-    new Chart(ctx, {
-        type: 'radar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Promedio de Cohorte',
-                data: values,
-                backgroundColor: 'rgba(99, 102, 241, 0.2)',
-                borderColor: '#6366f1',
-                pointBackgroundColor: '#6366f1',
-                pointBorderColor: '#fff',
-                pointHoverBackgroundColor: '#fff',
-                pointHoverBorderColor: '#6366f1',
-                borderWidth: 3
-            }]
-        },
-        options: {
-            scales: {
-                r: {
-                    angleLines: { color: 'rgba(255,255,255,0.1)' },
-                    grid: { color: 'rgba(255,255,255,0.1)' },
-                    pointLabels: { color: '#94a3b8', font: { size: 12 } },
-                    suggestedMin: 0,
-                    suggestedMax: 100,
-                    ticks: { display: false }
-                }
-            },
-            plugins: {
-                legend: { display: false }
-            }
-        }
-    });
-}
-
-function updateRiskList(atRisk) {
-    const list = document.getElementById('at-risk-list');
-    list.innerHTML = '';
-
-    if (!atRisk || atRisk.length === 0) {
-        list.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 20px;">No hay alumnos en riesgo detectados.</p>';
-        return;
-    }
-
-    atRisk.forEach(student => {
-        const item = document.createElement('div');
-        item.className = 'risk-item';
-        
-        // El formato depende de si viene del Monitor o del Auditor
-        const id = student.student_id || student['Entidad ID'];
-        const score = student.risk_score || (student.Valor * 10);
-        const level = student.risk_level || (student.Valor < 3 ? "CRITICO" : "MEDIO");
-
-        item.innerHTML = `
-            <div>
-                <span style="font-weight: bold; color: white;">${id}</span>
-                <div style="font-size: 0.8rem; color: var(--text-muted);">Score de Riesgo: ${score}</div>
-            </div>
-            <span class="risk-tag tag-${level.toLowerCase()}">${level}</span>
+    // Cycles Table
+    const tableBody = document.getElementById('cycles-table-body');
+    tableBody.innerHTML = '';
+    data.recent_cycles.forEach(cycle => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${cycle.student}</td>
+            <td><span style="color: ${cycle.grade >= 5 ? '#00ffaa' : '#ff4444'}">${cycle.grade}/10</span></td>
+            <td><span class="status-badge ${cycle.status.toLowerCase()}">${cycle.status}</span></td>
+            <td style="color: #a0a0b0; font-size: 0.8rem">${cycle.timestamp}</td>
         `;
-        list.appendChild(item);
+        tableBody.appendChild(row);
     });
+
+    // Ops Feed
+    const feed = document.getElementById('ops-feed');
+    feed.innerHTML = '';
+    data.ia_ops.slice().reverse().forEach(op => {
+        const item = document.createElement('div');
+        item.className = 'feed-item';
+        item.innerHTML = `
+            <div class="meta">
+                <span>${op.cell_id.toUpperCase()}</span>
+                <span>${op.latency_ms.toFixed(1)}ms</span>
+            </div>
+            <div class="content">${op.model_id} - ${op.status}</div>
+        `;
+        feed.appendChild(item);
+    });
+
+    // Chart update
+    updateChart(data.ia_ops);
 }
 
-function generateInsights(data) {
-    const textElement = document.getElementById('ai-insight-text');
-    let insight = "";
+let latencyChart;
+function updateChart(ops) {
+    const ctx = document.getElementById('latencyChart').getContext('2d');
+    const labels = ops.map((_, i) => i + 1);
+    const latencies = ops.map(op => op.latency_ms);
 
-    if (data.stats.nota_promedio > 7) {
-        insight = "La cohorte presenta un rendimiento académico sólido. Se observa una alta correlación entre el uso de la plataforma y las calificaciones finales.";
-    } else if (data.stats.nota_promedio < 5) {
-        insight = "Se detecta una tendencia crítica de bajo rendimiento. Se recomienda una intervención inmediata revisando los materiales de la célula 'Generador'.";
+    if (latencyChart) {
+        latencyChart.data.labels = labels;
+        latencyChart.data.datasets[0].data = latencies;
+        latencyChart.update();
     } else {
-        insight = "El rendimiento es estable, pero hay una brecha notable en competencias de Pensamiento Computacional.";
+        latencyChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Latencia IA (ms)',
+                    data: latencies,
+                    borderColor: '#00d2ff',
+                    backgroundColor: 'rgba(0, 210, 255, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } },
+                    x: { grid: { display: false } }
+                },
+                plugins: { legend: { display: false } }
+            }
+        });
     }
-
-    if (data.stats.alerta_riesgo > 0) {
-        insight += ` Hay ${data.stats.alerta_riesgo} estudiantes que requieren atención prioritaria por inactividad prolongada.`;
-    }
-
-    textElement.innerText = insight;
 }
 
-function animateValue(id, start, end, duration, isFloat = false) {
-    const obj = document.getElementById(id);
-    if (!obj) return;
-    
-    let startTimestamp = null;
-    const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        const val = progress * (end - start) + start;
-        obj.innerHTML = isFloat ? val.toFixed(1) : Math.floor(val);
-        if (progress < 1) {
-            window.requestAnimationFrame(step);
-        }
-    };
-    window.requestAnimationFrame(step);
-}
-
-function showError(msg) {
-    const container = document.querySelector('.container');
-    container.innerHTML = `<div style="text-align:center; padding:50px;">
-        <h2 style="color:var(--danger)">✘ Error de Datos</h2>
-        <p style="color:var(--text-muted); margin-top:10px;">${msg}</p>
-        <button onclick="location.reload()" style="margin-top:20px; padding:10px 20px; background:var(--primary); border:none; color:white; border-radius:8px; cursor:pointer;">Reintentar</button>
-    </div>`;
-}
+// Initial fetch and interval
+fetchData();
+setInterval(fetchData, 5000); // Refresh every 5s

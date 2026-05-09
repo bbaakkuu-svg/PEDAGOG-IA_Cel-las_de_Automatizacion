@@ -15,15 +15,23 @@ if sys.platform == "win32":
 
 # Resolución de rutas para acceder al núcleo compartido
 from pathlib import Path
-root_path = Path(__file__).parent.parent
+root_path = Path(__file__).parent.parent.parent
 if str(root_path) not in sys.path:
     sys.path.insert(0, str(root_path))
 
+# Integración de IA-Ops Observability (Independiente)
 try:
-    from pedagogia_shared import Config
-    from pedagogia_shared.adapters.pdf_adapter import PDFAdapter
-    from pedagogia_shared.adapters.excel_adapter import ExcelExporter
-    from shared_core.cache import FileCache
+    from infra.observability import default_logger, InteractionStatus
+except ImportError:
+    default_logger = None
+    InteractionStatus = None
+
+# Núcleo del Ecosistema
+try:
+    from core.config import Config
+    from core.adapters.pdf_adapter import PDFAdapter
+    from core.adapters.excel_adapter import ExcelExporter
+    from core.cache import FileCache
 except ImportError:
     Config = None
     PDFAdapter = None
@@ -208,7 +216,34 @@ class RubricAuditorSEA:
                         console.print("[dim]⚡ Resultado recuperado de caché (acelerado).[/dim]")
                     results = cached_results
                 else:
-                    results = self._perform_comparative_analysis(work_text, rubric)
+                    start_time = time.time()
+                    try:
+                        results = self._perform_comparative_analysis(work_text, rubric)
+                        latency_ms = (time.time() - start_time) * 1000
+                        
+                        # Registro de telemetría (Éxito)
+                        if default_logger:
+                            default_logger.log_interaction(
+                                cell_id="auditor",
+                                model_id="local-sea-v4", # En este caso es el engine local
+                                latency_ms=latency_ms,
+                                prompt_tokens=len(work_text.split()), # Estimación simple
+                                completion_tokens=len(json.dumps(results).split()),
+                                status=InteractionStatus.SUCCESS,
+                                metadata={"file": os.path.basename(path)}
+                            )
+                    except Exception as e:
+                        latency_ms = (time.time() - start_time) * 1000
+                        if default_logger:
+                            default_logger.log_interaction(
+                                cell_id="auditor",
+                                model_id="local-sea-v4",
+                                latency_ms=latency_ms,
+                                status=InteractionStatus.FAILURE,
+                                error_message=str(e)
+                            )
+                        raise e
+                    
                     if self.cache:
                         self.cache.set(cache_key, results)
                 
@@ -225,9 +260,26 @@ class RubricAuditorSEA:
                         details=summary
                     )
                 
+                # Exportar a JSON para el Cerebro Central
+                output_dir = os.path.join(root_path, "output", "evaluations")
+                os.makedirs(output_dir, exist_ok=True)
+                json_output_path = os.path.join(output_dir, f"{os.path.splitext(os.path.basename(path))[0]}.json")
+                
+                eval_for_brain = {
+                    "student_id": os.path.splitext(os.path.basename(path))[0],
+                    "source_file": os.path.basename(path),
+                    "nota": results['nota'],
+                    "detalles": results['detalles'],
+                    "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+                }
+                
+                with open(json_output_path, "w", encoding="utf-8") as f:
+                    json.dump(eval_for_brain, f, indent=4, ensure_ascii=False)
+
                 # Reporte en consola si no es modo batch (quiet)
                 if not quiet:
                     self._display_detailed_report(results, os.path.basename(path), rubric['source'])
+                    console.print(f"[dim]Data persistida para el Cerebro Central en: {os.path.basename(json_output_path)}[/dim]")
                 
                 return True
         except Exception as e:

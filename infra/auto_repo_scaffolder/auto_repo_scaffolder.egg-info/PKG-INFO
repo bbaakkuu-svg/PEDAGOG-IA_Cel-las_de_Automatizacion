@@ -2,7 +2,7 @@ Metadata-Version: 2.4
 Name: auto-repo-scaffolder
 Version: 0.1.0
 Summary: Automatización para la creación de repositorios bajo el estándar Reitz y Arquitectura Limpia.
-Author: Antigravity Célula Docensas
+Author: Antigravity Célula Pedagog-ia
 Requires-Python: >=3.9
 Requires-Dist: pydantic>=2.0.0
 Requires-Dist: jinja2>=3.0.0

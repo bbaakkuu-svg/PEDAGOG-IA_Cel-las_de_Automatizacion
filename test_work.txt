@@ -1,0 +1,2 @@
+Este es un trabajo de prueba para evaluar la capacidad de analisis de la celula auditora.
+Incluye terminos tecnicos como Calidad Tecnica e Innovacion para que el motor local lo puntue.

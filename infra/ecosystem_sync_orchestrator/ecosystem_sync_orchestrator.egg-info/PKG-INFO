@@ -2,7 +2,7 @@ Metadata-Version: 2.4
 Name: ecosystem-sync-orchestrator
 Version: 0.1.0
 Summary: Orquestador multi-estrategia para la sincronización de activos de automatización.
-Author: Antigravity Célula Docensas
+Author: Antigravity Célula Pedagog-ia
 Requires-Python: >=3.9
 Requires-Dist: rich>=10.0.0
 Dynamic: author

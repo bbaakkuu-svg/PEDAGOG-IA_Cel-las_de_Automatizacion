@@ -2,7 +2,7 @@ Metadata-Version: 2.4
 Name: api-intelligence-wrapper
 Version: 0.1.0
 Summary: Facade Pattern para simplificar integraciones de APIs complejas.
-Author: Antigravity Célula Docensas
+Author: Antigravity Célula Pedagog-ia
 Requires-Python: >=3.9
 Requires-Dist: pydantic>=2.0.0
 Requires-Dist: requests>=2.25.0
